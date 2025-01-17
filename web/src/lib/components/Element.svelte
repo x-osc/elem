@@ -1,5 +1,7 @@
 <script lang="ts">
+  import ElementDisplay from "./ElementDisplay.svelte";
+
   let { id }: { id: string } = $props();
 </script>
 
-<div>{id}</div>
+<div><ElementDisplay name={id} /></div>
