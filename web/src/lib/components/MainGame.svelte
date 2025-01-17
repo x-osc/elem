@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Category from "./Category.svelte";
+
   type ElementState = { [key: string]: string[] };
 
   const elementState: ElementState = $state({
@@ -8,13 +10,17 @@
     water: ["water"],
   });
 
+  function addElement(category: string, id: string) {
+    elementState[category].push(id);
+  }
+
   const categories = $derived(Object.keys(elementState));
 </script>
 
 <div>
-  {#each categories as category}
-    <div>{category}</div>
+  {#each categories as categoryId}
+    <Category id={categoryId} elements={elementState[categoryId]} />
   {/each}
 
-  <button onclick={() => elementState["air"].push("air")}>big er</button>
+  <button onclick={() => addElement("air", "air")}>big er</button>
 </div>
