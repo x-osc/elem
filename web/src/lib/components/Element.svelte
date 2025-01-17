@@ -9,5 +9,6 @@
 <style>
   div {
     display: inline-block;
+    margin: 0.4rem;
   }
 </style>
