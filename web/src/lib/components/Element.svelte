@@ -5,3 +5,9 @@
 </script>
 
 <div><ElementDisplay name={id} /></div>
+
+<style>
+  div {
+    display: inline-block;
+  }
+</style>
