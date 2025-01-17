@@ -1,5 +1,6 @@
 <script lang="ts">
   import Category from "./Category.svelte";
+  import HeldElement from "./HeldElement.svelte";
 
   type ElementState = { [key: string]: string[] };
 
@@ -21,6 +22,8 @@
   {#each categories as categoryId}
     <Category id={categoryId} elements={elementState[categoryId]} />
   {/each}
+
+  <HeldElement id="air" />
 
   <button onclick={() => addElement("air", "air")}>big er</button>
 </div>
