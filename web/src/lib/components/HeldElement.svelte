@@ -1,18 +1,19 @@
 <script lang="ts">
   import ElementDisplay from "./ElementDisplay.svelte";
 
-  let { id }: { id: string } = $props();
+  let { id, mousePos }: { id: string; mousePos: { x: number; y: number } } =
+    $props();
 
-  let mousePos = $state({ x: 0, y: 0 });
+  let currMousePos = $state(mousePos);
 
   function handleMouseMove(event: MouseEvent) {
-    mousePos = { x: event.x, y: event.y };
+    currMousePos = { x: event.x, y: event.y };
   }
 </script>
 
 <svelte:document onpointermove={handleMouseMove} />
 
-<div style="left: {mousePos.x}px; top: {mousePos.y}px">
+<div style="left: {currMousePos.x}px; top: {currMousePos.y}px">
   <ElementDisplay name={id} />
 </div>
 
