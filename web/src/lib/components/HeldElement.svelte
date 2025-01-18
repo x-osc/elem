@@ -1,10 +1,10 @@
 <script lang="ts">
+  import { scale } from "svelte/transition";
   import ElementDisplay from "./ElementDisplay.svelte";
 
-  let { id, mousePos }: { id: string; mousePos: { x: number; y: number } } =
-    $props();
+  let { id }: { id: string | null } = $props();
 
-  let currMousePos = $state(mousePos);
+  let currMousePos = $state({ x: 0, y: 0 });
 
   function handleMouseMove(event: MouseEvent) {
     currMousePos = { x: event.x, y: event.y };
@@ -13,9 +13,14 @@
 
 <svelte:document onpointermove={handleMouseMove} />
 
-<div style="left: {currMousePos.x}px; top: {currMousePos.y}px">
-  <ElementDisplay name={id} />
-</div>
+{#if id}
+  <div
+    style="left: {currMousePos.x}px; top: {currMousePos.y}px"
+    transition:scale
+  >
+    <ElementDisplay name={id} />
+  </div>
+{/if}
 
 <style>
   div {

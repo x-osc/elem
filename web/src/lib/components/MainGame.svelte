@@ -50,9 +50,7 @@
     <Category id={categoryId} elements={elementState[categoryId]} />
   {/each}
 
-  {#if heldElement}
-    <HeldElement id={heldElement} mousePos={mouseClickPos} />
-  {/if}
+  <HeldElement id={heldElement} />
 
   <button onclick={() => addElement("air", "air")}>big er</button>
 </div>

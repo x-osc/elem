@@ -8,7 +8,9 @@
     getContext("onClickCallback");
 </script>
 
-<div onclick={(e) => onClickCallback(e, id)}><ElementDisplay name={id} /></div>
+<div onclick={(e) => onClickCallback(e, id)}>
+  <ElementDisplay name={id} />
+</div>
 
 <style>
   div {
