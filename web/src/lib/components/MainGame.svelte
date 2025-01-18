@@ -22,14 +22,26 @@
 
   let heldElement: string | null = $state(null);
 
-  function onElementClicked(id: string) {
-    heldElement = id;
+  function onElementClicked(event: MouseEvent, id: string) {
+    event.stopPropagation();
+
+    if (!heldElement) {
+      heldElement = id;
+    } else {
+      heldElement = null;
+    }
+  }
+
+  function onMouseClick() {
+    heldElement = null;
   }
 
   setContext("onClickCallback", onElementClicked);
 
   const categories = $derived(Object.keys(elementState));
 </script>
+
+<svelte:document onclick={onMouseClick} />
 
 <div>
   {#each categories as categoryId}

@@ -4,10 +4,11 @@
 
   let { id }: { id: string } = $props();
 
-  let onClickCallback: (id: string) => void = getContext("onClickCallback");
+  let onClickCallback: (event: MouseEvent, id: string) => void =
+    getContext("onClickCallback");
 </script>
 
-<div onclick={() => onClickCallback(id)}><ElementDisplay name={id} /></div>
+<div onclick={(e) => onClickCallback(e, id)}><ElementDisplay name={id} /></div>
 
 <style>
   div {
