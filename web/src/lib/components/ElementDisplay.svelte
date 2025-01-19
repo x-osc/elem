@@ -1,10 +1,15 @@
 <script lang="ts">
   import type { ElementData } from "$lib/utils/data";
+  import { colorIsDark } from "$lib/utils/text";
 
   let { data }: { data: ElementData } = $props();
+
+  let isDark = colorIsDark(data.color);
 </script>
 
-<div style="background-color: {data.color};">{data.name}</div>
+<div class={isDark ? "dark" : "light"} style="background-color: {data.color};">
+  {data.name}
+</div>
 
 <style>
   div {
@@ -31,5 +36,13 @@
     overflow-wrap: break-word;
     overflow-x: hidden;
     overflow-y: auto;
+  }
+
+  .light {
+    color: #000000;
+  }
+
+  .dark {
+    color: #ffffff;
   }
 </style>
