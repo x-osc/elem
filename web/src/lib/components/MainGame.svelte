@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getResult } from "$lib/utils/data";
+  import { getElementDataFallback, getResult } from "$lib/utils/data";
   import { setContext } from "svelte";
   import Category from "./Category.svelte";
   import HeldElement from "./HeldElement.svelte";
@@ -41,7 +41,7 @@
         return;
       }
 
-      addElement("air", result);
+      addElement(getElementDataFallback(result).category, result);
     }
   }
 
