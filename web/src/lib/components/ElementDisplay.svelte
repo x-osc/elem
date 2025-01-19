@@ -4,7 +4,7 @@
   let { data }: { data: ElementData } = $props();
 </script>
 
-<div>{data.name}</div>
+<div style="background-color: {data.color};">{data.name}</div>
 
 <style>
   div {
