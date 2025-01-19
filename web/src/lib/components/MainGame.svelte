@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { getResult } from "$lib/utils/data";
   import { setContext } from "svelte";
   import Category from "./Category.svelte";
   import HeldElement from "./HeldElement.svelte";
@@ -30,7 +31,15 @@
     if (!heldElement) {
       heldElement = id;
     } else {
+      const result = getResult(id, heldElement);
       heldElement = null;
+
+      if (result === null) {
+        console.log("cant combine these elemenets");
+        return;
+      }
+
+      addElement("air", result);
     }
   }
 
