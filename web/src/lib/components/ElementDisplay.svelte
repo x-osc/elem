@@ -7,12 +7,15 @@
   let isDark = colorIsDark(data.color);
 </script>
 
-<div class={isDark ? "dark" : "light"} style="background-color: {data.color};">
+<div
+  class="elem {isDark ? 'dark' : 'light'}"
+  style="background-color: {data.color};"
+>
   {data.name}
 </div>
 
 <style>
-  div {
+  .elem {
     display: inline-block;
     justify-content: center;
     text-align: center;
