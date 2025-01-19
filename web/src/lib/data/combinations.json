@@ -2,5 +2,5 @@
     "fire|water": "steam",
     "fire|earth": "lava",
     "earth|water": "mud",
-    "steam|lava": "igneous_rock"
+    "air|lava": "igneous_rock"
 }
