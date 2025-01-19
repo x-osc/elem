@@ -43,6 +43,6 @@
   }
 
   .dark {
-    color: #ffffff;
+    color: #fafafa;
   }
 </style>
