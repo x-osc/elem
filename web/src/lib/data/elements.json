@@ -3,24 +3,24 @@
         "name": "Air",
         "category": "air",
         "tier": 1,
-        "color": "#5aabd4"
+        "color": "#97dafb"
     },
     "earth": {
         "name": "Earth",
         "category": "earth",
         "tier": 1,
-        "color": "#705538"
+        "color": "#734f31"
     },
     "fire": {
         "name": "Fire",
         "category": "fire",
         "tier": 1,
-        "color": "#d4835a"
+        "color": "#f57f43"
     },
     "water": {
         "name": "Water",
         "category": "water",
         "tier": 1,
-        "color": "#5a7cec"
+        "color": "#5177f3"
     }
 }
