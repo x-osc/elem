@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getElementDataFallback, getResult } from "$lib/utils/data";
+  import { getElementData, getResult } from "$lib/utils/data";
   import { loadGameFast, saveGame, type ElementState } from "$lib/utils/save";
   import { setContext } from "svelte";
   import Category from "./Category.svelte";
@@ -10,6 +10,10 @@
   const elementState: ElementState = $state(loadGameFast());
 
   function addElement(category: string, id: string) {
+    if (!elementState[category]) {
+      elementState[category] = [];
+    }
+
     if (!elementState[category].includes(id)) {
       elementState[category].push(id);
     }
@@ -39,7 +43,13 @@
         return;
       }
 
-      addElement(getElementDataFallback(result).category, result);
+      let category = getElementData(result)?.category;
+      if (!category) {
+        console.log(`element {${result}} doesnt exist (or has no category)`);
+        return;
+      }
+
+      addElement(category, result);
     }
   }
 

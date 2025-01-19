@@ -27,14 +27,3 @@ export function getResult(elem1: string, elem2: string): string | null {
 export function getElementData(id: string): ElementData | null {
   return elements[id] ?? null;
 }
-
-export function getElementDataFallback(id: string): ElementData {
-  return (
-    getElementData(id) ?? {
-      name: "NULL // id: " + id,
-      category: "air",
-      tier: 1,
-      color: "#f700ff",
-    }
-  );
-}

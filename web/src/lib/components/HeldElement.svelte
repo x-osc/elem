@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { getElementDataFallback } from "$lib/utils/data";
+  import { getElementData } from "$lib/utils/data";
   import { scale } from "svelte/transition";
   import ElementDisplay from "./ElementDisplay.svelte";
 
   let { id }: { id: string | null } = $props();
 
-  let data = $derived(id ? getElementDataFallback(id) : null);
+  let data = $derived(id ? getElementData(id) : null);
 
   let currMousePos = $state({ x: 0, y: 0 });
 
