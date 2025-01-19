@@ -40,5 +40,11 @@
         "category": "earth",
         "tier": 2,
         "color": "#734f31"
+    },
+    "igneous_rock": {
+        "name": "Igneous Rock",
+        "category": "earth",
+        "tier": 3,
+        "color": "#734f31"
     }
 }
