@@ -1,3 +1,5 @@
 {
-    "fire|water": "steam"
+    "fire|water": "steam",
+    "fire|earth": "lava",
+    "earth|water": "mud"
 }

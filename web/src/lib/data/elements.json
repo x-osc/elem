@@ -22,5 +22,23 @@
         "category": "water",
         "tier": 1,
         "color": "#5177f3"
+    },
+    "steam": {
+        "name": "Steam",
+        "category": "air",
+        "tier": 2,
+        "color": "#97dafb"
+    },
+    "lava": {
+        "name": "Lava",
+        "category": "fire",
+        "tier": 2,
+        "color": "#f57f43"
+    },
+    "mud": {
+        "name": "Mud",
+        "category": "earth",
+        "tier": 2,
+        "color": "#734f31"
     }
 }
