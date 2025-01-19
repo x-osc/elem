@@ -60,6 +60,4 @@
   {/each}
 
   <HeldElement id={heldElement} />
-
-  <button onclick={() => addElement("air", "air")}>big er</button>
 </div>
