@@ -27,3 +27,7 @@ export function getResult(elem1: string, elem2: string): string | null {
 export function getElementData(id: string): ElementData | null {
   return elements[id] ?? null;
 }
+
+export function elementExists(id: string) {
+  return Object.hasOwn(elements, id);
+}

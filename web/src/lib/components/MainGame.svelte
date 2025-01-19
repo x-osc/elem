@@ -1,17 +1,18 @@
 <script lang="ts">
   import { getElementData, getResult } from "$lib/utils/data";
-  import { loadGameFast, saveGame, type ElementState } from "$lib/utils/save";
+  import { loadGameSlow, saveGame, type ElementState } from "$lib/utils/save";
   import { setContext } from "svelte";
   import Category from "./Category.svelte";
   import HeldElement from "./HeldElement.svelte";
 
   // game state
 
-  const elementState: ElementState = $state(loadGameFast());
+  const elementState: ElementState = $state(loadGameSlow());
 
   function addElement(category: string, id: string) {
     if (!elementState[category]) {
-      elementState[category] = [];
+      elementState[category] = [id];
+      return;
     }
 
     if (!elementState[category].includes(id)) {
