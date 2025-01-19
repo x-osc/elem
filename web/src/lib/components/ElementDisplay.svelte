@@ -1,8 +1,10 @@
 <script lang="ts">
-  let { name }: { name: string } = $props();
+  import type { ElementData } from "$lib/utils/data";
+
+  let { data }: { data: ElementData } = $props();
 </script>
 
-<div>{name}</div>
+<div>{data.name}</div>
 
 <style>
   div {
