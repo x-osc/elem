@@ -16,7 +16,9 @@
   });
 
   function addElement(category: string, id: string) {
-    elementState[category].push(id);
+    if (!elementState[category].includes(id)) {
+      elementState[category].push(id);
+    }
   }
 
   // held element
