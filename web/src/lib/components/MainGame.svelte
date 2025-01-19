@@ -26,11 +26,9 @@
   // held element
 
   let heldElement: string | null = $state(null);
-  let mouseClickPos = $state({ x: 0, y: 0 });
 
   function onElementClicked(event: MouseEvent, id: string) {
     event.stopPropagation();
-    mouseClickPos = { x: event.x, y: event.y };
 
     if (!heldElement) {
       heldElement = id;
