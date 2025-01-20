@@ -21,7 +21,7 @@
     text-align: center;
     box-sizing: border-box;
 
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     width: 70px;
     height: 70px;
     max-width: 70px;
