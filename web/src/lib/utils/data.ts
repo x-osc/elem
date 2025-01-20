@@ -1,5 +1,10 @@
+import categoryJson from "$lib/data/categories.json";
 import combinationsJson from "$lib/data/combinations.json";
 import elementsJson from "$lib/data/elements.json";
+
+export type CategoryData = {
+  name: string;
+};
 
 export type ElementData = {
   name: string;
@@ -8,6 +13,7 @@ export type ElementData = {
   color: string;
 };
 
+const categories: { [id: string]: CategoryData } = categoryJson;
 const combinations: { [comb: string]: string } = combinationsJson;
 const elements: { [id: string]: ElementData } = elementsJson;
 
@@ -30,4 +36,8 @@ export function getElementData(id: string): ElementData | null {
 
 export function elementExists(id: string) {
   return Object.hasOwn(elements, id);
+}
+
+export function getCategoryData(id: string): CategoryData | null {
+  return categories[id] ?? null;
 }

@@ -1,0 +1,14 @@
+{
+    "air": {
+        "name": "Air"
+    },
+    "earth": {
+        "name": "Earth"
+    },
+    "fire": {
+        "name": "Fire"
+    },
+    "water": {
+        "name": "Water"
+    }
+}
