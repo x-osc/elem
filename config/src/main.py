@@ -1,8 +1,8 @@
 import utils
 
-categories = {}
-elements = {}
-combinations = {}
+categories: dict[str, dict] = {}
+elements: dict[str, dict] = {}
+combinations: dict[tuple[str, str], str] = {}
 
 
 def add_category(id: str, name: str, color=None, **kwargs):
