@@ -1,14 +1,11 @@
 import data
+from config_helpers import category, combination, element
 
 
 def main():
-    data.add_category("a", "a", color="#d1fd1f")
-    data.add_element(
-        "asdf",
-        "Asdf",
-        "a",
-    )
-    data.add_combination("asdf", "asdf", "asdf")
+    category("a", "a", color="#d1fd1f")
+    element("asdf", "Asdf", "a")
+    combination("asdf", "asdf", "asdf")
 
     print(data.categories)
     print(data.elements)
