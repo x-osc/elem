@@ -5,7 +5,7 @@ def verify_hex_color(value: str):
         raise ValueError("Color must have 6 hexadecimal digits")
     hex_part = value[1:]
     if not all(c in "0123456789abcdefABCDEF" for c in hex_part):
-        raise ValueError("Invalid hexadecimal digits in color")
+        raise ValueError("Invalid non-hexadecimal digits in color")
     return value
 
 
