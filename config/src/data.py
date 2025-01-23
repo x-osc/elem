@@ -19,18 +19,15 @@ def add_element(id: str, name: str, category_id: str, color=None, **kwargs):
             "Category id of element does not exist (is the category defined before this element?)"
         )
 
-    if color is None:
-        new_color = categories[category_id].get("color")
-        if new_color is None:
-            raise Exception("Category of element has no color, must specify color")
-        color = new_color
-    else:
-        color = utils.verify_hex_color(color)
+    if color is None and categories[id].get("color") is None:
+        raise Exception(
+            "Neither element or category defines a color, must specify color"
+        )
 
     elements[utils.verify_id(id)] = {
         "name": name,
         "category": category_id,
-        "color": color,
+        "color": None if color is None else utils.verify_hex_color(color),
         **kwargs,
     }
 
