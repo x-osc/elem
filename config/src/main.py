@@ -5,7 +5,7 @@ elements = {}
 combinations = {}
 
 
-def addCategory(id: str, name: str, color="#000000", **kwargs):
+def add_category(id: str, name: str, color="#000000", **kwargs):
     categories[utils.verify_id(id)] = {
         "name": name,
         "color": utils.verify_hex_color(color),
@@ -14,7 +14,7 @@ def addCategory(id: str, name: str, color="#000000", **kwargs):
 
 
 def main():
-    addCategory("a", "a", color="#d1fd1f")
+    add_category("a", "a", color="#d1fd1f")
     print(categories)
 
 
