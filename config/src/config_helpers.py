@@ -1,4 +1,5 @@
 import data
+import utils
 
 aliases: dict[str, list[str]] = {}
 
@@ -45,4 +46,4 @@ def alias(id: str, elems: list[str]):
     if not all(elem in data.elements.keys() for elem in elems):
         raise ValueError("All aliases must be vaild element ids, some do not exist")
 
-    aliases[id[1:]] = elems
+    aliases[utils.verify_id(id[1:])] = elems
