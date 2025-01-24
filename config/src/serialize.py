@@ -7,6 +7,9 @@ import data
 def serialize(path):
     with open(Path(path) / "elements.json", "w") as f:
         elems = data.elements
+        for elem in elems.keys():
+            # TODO: actually add tier
+            elems[elem]["tier"] = 1
 
         json.dump(elems, f)
 
