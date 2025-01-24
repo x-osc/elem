@@ -1,3 +1,6 @@
+import re
+
+
 def verify_hex_color(value: str):
     if not value.startswith("#"):
         raise ValueError("Color must start with '#'")
@@ -12,6 +15,6 @@ def verify_hex_color(value: str):
 def verify_id(id: str):
     if len(id) == 0:
         raise ValueError("Id must not be empty")
-    if not id.isalnum():
+    if not bool(re.match(r"^[a-zA-Z0-9_-]+$", id)):
         raise ValueError("Id must be alphanumeric")
     return id
