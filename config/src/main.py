@@ -1,5 +1,6 @@
 import configuration.main as config
 import data
+import serialize
 
 
 def main():
@@ -8,6 +9,8 @@ def main():
     print(data.categories)
     print(data.elements)
     print(data.combinations)
+
+    serialize.serialize("../")
 
 
 if __name__ == "__main__":

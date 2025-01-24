@@ -1,3 +1,8 @@
+# elem
+categories.json
+combinations.json
+elements.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
