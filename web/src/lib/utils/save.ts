@@ -45,7 +45,8 @@ export function loadGameSlow(): ElementState {
     categoryList = categoryList.filter((elem) => elementExists(elem));
     categoryList = remove_duplicates(categoryList);
 
-    for (const elem in categoryList) {
+    console.log(categoryList);
+    categoryList.forEach((elem) => {
       if (getElementData(elem)?.category !== category) {
         // delete elem
         const index = categoryList.indexOf(elem);
@@ -55,7 +56,7 @@ export function loadGameSlow(): ElementState {
 
         save[category].push(elem);
       }
-    }
+    });
 
     save[category] = categoryList;
 
