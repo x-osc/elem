@@ -1,20 +1,20 @@
 import json
-import os
+from pathlib import Path
 
 import data
 
 
 def serialize(path):
-    with open(os.path.join(path, "elements.json"), "w") as f:
+    with open(Path(path) / "elements.json", "w") as f:
         elems = data.elements
 
         json.dump(elems, f)
 
-    with open(os.path.join(path, "categories.json"), "w") as f:
+    with open(Path(path) / "categories.json", "w") as f:
         cats = data.categories
 
         json.dump(cats, f)
-    with open(os.path.join(path, "combinations.json"), "w") as f:
+    with open(Path(path) / "combinations.json", "w") as f:
         combs = data.combinations
 
         new_combs = {}

@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import configuration.main as config
 import data
 import serialize
@@ -10,7 +12,7 @@ def main():
     print(data.elements)
     print(data.combinations)
 
-    serialize.serialize("../")
+    serialize.serialize(Path(__file__).parents[2])
 
 
 if __name__ == "__main__":
