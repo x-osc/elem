@@ -1,11 +1,9 @@
+import configuration.main as config
 import data
-from config_helpers import category, combination, element
 
 
 def main():
-    category("a", "a", color="#d1fd1f")
-    element("asdf", "Asdf", "a")
-    combination("asdf", "asdf", "asdf")
+    config.config()
 
     print(data.categories)
     print(data.elements)
