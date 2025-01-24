@@ -1,5 +1,5 @@
 import { browser } from "$app/environment";
-import { elementExists } from "./data";
+import { elementExists, getElementData } from "./data";
 
 export type ElementState = { [key: string]: string[] };
 const key = "gamesave";
@@ -30,11 +30,35 @@ export function loadGameFast(): ElementState {
   };
 }
 
+function remove_duplicates(array: Array<string>) {
+  const seen: { [item: string]: boolean } = {};
+  return array.filter(function (item) {
+    return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+  });
+}
+
 export function loadGameSlow(): ElementState {
   const save = loadGameFast();
 
-  for (const [category, categoryList] of Object.entries(save)) {
-    save[category] = categoryList.filter((elem) => elementExists(elem));
+  // eslint-disable-next-line prefer-const
+  for (let [category, categoryList] of Object.entries(save)) {
+    categoryList = categoryList.filter((elem) => elementExists(elem));
+    categoryList = remove_duplicates(categoryList);
+
+    for (const elem in categoryList) {
+      if (getElementData(elem)?.category !== category) {
+        // delete elem
+        const index = categoryList.indexOf(elem);
+        if (index > -1) {
+          categoryList.splice(index, 1);
+        }
+
+        save[category].push(elem);
+      }
+    }
+
+    save[category] = categoryList;
+
     if (save[category].length === 0) {
       delete save[category];
     }
