@@ -33,7 +33,7 @@ export function loadGameFast(): ElementState {
 function remove_duplicates(array: Array<string>) {
   const seen: { [item: string]: boolean } = {};
   return array.filter(function (item) {
-    return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+    return Object.hasOwn(seen, item) ? false : (seen[item] = true);
   });
 }
 
