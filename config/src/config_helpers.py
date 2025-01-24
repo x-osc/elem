@@ -31,7 +31,7 @@ def combination(result: str, elem1: str, elem2: str):
             return ValueError("Alias is not vaild")
 
         for elem in alias_elems:
-            combination(result, elem, elem2)
+            combination(result, elem1, elem)
 
         return
 
