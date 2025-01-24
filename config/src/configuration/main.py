@@ -2,13 +2,26 @@ from config_helpers import alias, category, combination, element
 
 
 def config():
-    category("a", "a", color="#d1fd1f")
+    category("air", "Air", color="#97dafb")
+    category("earth", "Earth", color="#5177f3")
+    category("fire", "Fire", color="#f57f43")
+    category("water", "Water", color="#734f31")
 
-    element("a", "a", "a")
-    element("b", "b", "a")
-    element("c", "c", "a")
-    element("d", "d", "a")
+    element("air", "Air", "air")
+    element("earth", "Earth", "earth")
+    element("fire", "Fire", "fire")
+    element("water", "Water", "water")
 
-    alias("$base", ["a", "b"])
+    element("steam", "Steam", "air")
 
-    combination("a", "$base", "a")
+    element("mud", "Mud", "earth")
+    element("igneous_rock", "Igneous Rock", "earth")
+
+    element("lava", "Lava", "fire")
+
+    alias("$base", ["air", "earth", "fire", "water"])
+
+    combination("steam", "fire", "water")
+    combination("mud", "water", "earth")
+    combination("lava", "fire", "earth")
+    combination("igneous_rock", "lava", "air")
