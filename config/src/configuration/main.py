@@ -1,7 +1,14 @@
-from config_helpers import category, combination, element
+from config_helpers import alias, category, combination, element
 
 
 def config():
     category("a", "a", color="#d1fd1f")
-    element("asdf", "Asdf", "a")
-    combination("asdf", "asdf", "asdf")
+
+    element("a", "a", "a")
+    element("b", "b", "a")
+    element("c", "c", "a")
+    element("d", "d", "a")
+
+    alias("$base", ["a", "b"])
+
+    combination("a", "$base", "a")
