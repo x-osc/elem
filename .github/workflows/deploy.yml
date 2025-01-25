@@ -21,6 +21,9 @@ jobs:
           node-version: 20
           cache: npm
 
+      - name: Navigate to web/
+        run: cd web/
+
       - name: Install dependencies
         run: npm install
 
@@ -33,7 +36,7 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "build/"
+          path: "web/build"
 
   deploy:
     needs: build_site
