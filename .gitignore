@@ -1,3 +1,7 @@
-categories.json
-combinations.json
-elements.json
+/categories.json
+/combinations.json
+/elements.json
+
+/config/categories.json
+/config/combinations.json
+/config/elements.json

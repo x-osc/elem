@@ -1,7 +1,3 @@
-import categoryJson from "$lib/data/categories.json";
-import combinationsJson from "$lib/data/combinations.json";
-import elementsJson from "$lib/data/elements.json";
-
 export type CategoryData = {
   name: string;
 };
@@ -13,9 +9,17 @@ export type ElementData = {
   color: string;
 };
 
-const categories: { [id: string]: CategoryData } = categoryJson;
-const combinations: { [comb: string]: string } = combinationsJson;
-const elements: { [id: string]: ElementData } = elementsJson;
+let categories: { [id: string]: CategoryData };
+let combinations: { [comb: string]: string };
+let elements: { [id: string]: ElementData };
+
+export async function loadData() {
+  categories = await fetch("/data/categories.json").then((res) => res.json());
+  combinations = await fetch("/data/combinations.json").then((res) =>
+    res.json()
+  );
+  elements = await fetch("/data/elements.json").then((res) => res.json());
+}
 
 export function getResult(elem1: string, elem2: string): string | null {
   const comb1 = combinations[elem1 + "|" + elem2];
