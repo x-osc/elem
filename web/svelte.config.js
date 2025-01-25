@@ -18,6 +18,7 @@ const config = {
     inlineStyleThreshold: 400,
 
     // base path should be repo name
+    // also need to prefix relative paths with {base}
     paths: {
       base: process.argv.includes("dev") ? "" : process.env.BASE_PATH,
     },

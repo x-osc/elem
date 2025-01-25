@@ -1,3 +1,5 @@
+import { base } from "$app/paths";
+
 export type CategoryData = {
   name: string;
 };
@@ -14,11 +16,15 @@ let combinations: { [comb: string]: string };
 let elements: { [id: string]: ElementData };
 
 export async function loadData() {
-  categories = await fetch("/data/categories.json").then((res) => res.json());
-  combinations = await fetch("/data/combinations.json").then((res) =>
+  categories = await fetch(`${base}/data/categories.json`).then((res) =>
     res.json()
   );
-  elements = await fetch("/data/elements.json").then((res) => res.json());
+  combinations = await fetch(`${base}/data/combinations.json`).then((res) =>
+    res.json()
+  );
+  elements = await fetch(`${base}/data/elements.json`).then((res) =>
+    res.json()
+  );
 }
 
 export function getResult(elem1: string, elem2: string): string | null {
