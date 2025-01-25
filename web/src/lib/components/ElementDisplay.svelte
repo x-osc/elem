@@ -32,7 +32,6 @@
     padding-left: 0.2rem;
     padding-right: 0.2rem;
 
-    background-color: lightblue;
     box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.35);
 
     user-select: none;
@@ -41,11 +40,19 @@
     overflow-y: auto;
   }
 
+  .elem:hover {
+    background-image: linear-gradient(rgba(146, 146, 146, 0.15) 0 0);
+  }
+
+  .elem:active {
+    background-image: linear-gradient(rgba(146, 146, 146, 0.4) 0 0);
+  }
+
   .light {
-    color: #000000;
+    color: rgba(0, 0, 0, 0.8);
   }
 
   .dark {
-    color: #fafafa;
+    color: rgba(255, 255, 255, 0.8);
   }
 </style>
