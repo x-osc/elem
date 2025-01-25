@@ -41,11 +41,11 @@
   }
 
   .elem:hover {
-    background-image: linear-gradient(rgba(146, 146, 146, 0.15) 0 0);
+    background-image: linear-gradient(rgba(146, 146, 146, 0.1) 0 0);
   }
 
   .elem:active {
-    background-image: linear-gradient(rgba(146, 146, 146, 0.4) 0 0);
+    background-image: linear-gradient(rgba(146, 146, 146, 0.3) 0 0);
   }
 
   .light {
