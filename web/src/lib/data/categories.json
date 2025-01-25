@@ -1,14 +1,1 @@
-{
-    "air": {
-        "name": "Air"
-    },
-    "earth": {
-        "name": "Earth"
-    },
-    "fire": {
-        "name": "Fire"
-    },
-    "water": {
-        "name": "Water"
-    }
-}
+{"air": {"name": "Air", "color": "#97dafb"}, "earth": {"name": "Earth", "color": "#734f31"}, "fire": {"name": "Fire", "color": "#f57f43"}, "water": {"name": "Water", "color": "#5177f3"}, "rock": {"name": "Rock", "color": "#555555"}}
