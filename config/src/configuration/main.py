@@ -262,9 +262,7 @@ def config():
 
     combination("dust_bunny", "dust", "dust")
 
-    combination("swamp", "mud", "water")
     combination("swamp", "mud", "lake")
-    combination("swamp", "mud", "earth")
     combination("swamp", "mud", "land")
     combination("really_big_swamp", "mud", "ocean")
 
