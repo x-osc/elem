@@ -40,6 +40,8 @@ function remove_duplicates(array: Array<string>) {
 export function loadGameSlow(): ElementState {
   const save = loadGameFast();
 
+  // TODO: rewrite to just create a new save dict
+
   // eslint-disable-next-line prefer-const
   for (let [category, categoryList] of Object.entries(save)) {
     categoryList = categoryList.filter((elem) => elementExists(elem));

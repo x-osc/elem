@@ -19,7 +19,7 @@
 {#if data}
   <div
     style="left: {currMousePos.x}px; top: {currMousePos.y}px"
-    transition:scale
+    transition:scale={{ duration: 300 }}
   >
     <ElementDisplay {data} />
   </div>
