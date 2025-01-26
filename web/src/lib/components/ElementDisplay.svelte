@@ -22,10 +22,10 @@
     box-sizing: border-box;
 
     font-size: 0.8rem;
-    width: 70px;
-    height: 70px;
-    max-width: 70px;
-    max-height: 70px;
+    width: 75px;
+    height: 75px;
+    max-width: 75px;
+    max-height: 75px;
     border-radius: 7px;
     padding-top: 0.3rem;
     padding-bottom: 0.2rem;
