@@ -21,5 +21,8 @@ fn main() {
     let src = std::fs::read_to_string(std::env::args().nth(1).unwrap()).unwrap();
     let mut data = src.as_str();
 
-    println!("{:?}", elem_parser.parse(data).unwrap())
+    match elem_parser.parse(data) {
+        Ok(res) => println!("{:?}", res),
+        Err(err) => println!("{:?}", err),
+    }
 }
