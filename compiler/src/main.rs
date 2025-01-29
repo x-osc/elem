@@ -20,12 +20,12 @@ fn take_till_end_or_comment<'s>(input: &mut &'s str) -> PResult<&'s str> {
     Ok(val.trim())
 }
 
-fn parse_input<'s>(input: &mut &'s str) -> PResult<Vec<Stmt>> {
+fn parse_input(input: &mut &str) -> PResult<Vec<Stmt>> {
     let _ = ascii::multispace0.parse_next(input)?;
     repeat(0.., terminated(prop_val, opt(ascii::multispace0))).parse_next(input)
 }
 
-fn prop_val<'s>(input: &mut &'s str) -> PResult<Stmt> {
+fn prop_val(input: &mut &str) -> PResult<Stmt> {
     let prop = preceded("@", ascii::alphanumeric1).parse_next(input)?;
     let _ = (opt(space0), ":", opt(space0)).parse_next(input)?;
     let val = take_till_end_or_comment.parse_next(input)?;
