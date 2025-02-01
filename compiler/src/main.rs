@@ -11,7 +11,9 @@ enum Stmt {
 }
 
 fn comment(input: &mut &str) -> PResult<()> {
-    ('#', take_till(1.., ['\n', '\r'])).void().parse_next(input)
+    ("//", take_till(1.., ['\n', '\r']))
+        .void()
+        .parse_next(input)
 }
 
 fn take_till_end_or_comment<'s>(input: &mut &'s str) -> PResult<&'s str> {
