@@ -25,6 +25,7 @@ def combination(result: str, elem1: str, elem2: str):
             combination(result, elem, elem2)
 
         return
+    
 
     if elem2.startswith("$"):
         alias_elems = aliases.get(elem2[1:])
