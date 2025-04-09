@@ -8,7 +8,7 @@
   // game state
 
   const elementState: ElementState = $state(loadGameSlow());
-
+  
   function addElement(category: string, id: string) {
     if (!elementState[category]) {
       elementState[category] = [id];
@@ -27,6 +27,7 @@
   // held element
 
   let heldElement: string | null = $state(null);
+  let err: string | null = $state(null); //Help Im going insane
 
   function onElementClicked(event: MouseEvent, id: string) {
     event.stopPropagation();
@@ -39,21 +40,31 @@
 
       if (result === null) {
         console.log("cant combine these elemenets");
+        err = "Yeah that's not gonna work";
+
+        setTimeout(() => {
+          err = null;
+        }, 2000);
         return;
       }
+
+      //I need to make an edit to check if git is commiting
 
       let category = getElementData(result)?.category;
       if (!category) {
+        err = 'yeah buddy thats not gonna work';
         console.log(`element {${result}} doesnt exist (or has no category)`);
         return;
       }
-
+      
+      err = null;
       addElement(category, result);
     }
   }
 
   function onMouseClick() {
     heldElement = null;
+    err = null;
   }
 
   setContext("onClickCallback", onElementClicked);
@@ -63,10 +74,24 @@
 
 <svelte:document onclick={onMouseClick} />
 
+<button type="button" on:click={onElementClicked}>
+  {#if err}
+    <div class="error-message">{err}</div>
+  {/if}
+</button>  
 <div>
+
   {#each categories as categoryId}
     <Category id={categoryId} elements={elementState[categoryId]} />
   {/each}
 
   <HeldElement id={heldElement} />
 </div>
+
+<style>
+  .error-message {
+  color: orange;
+  font-weight: bold;
+  font-size: 1em;
+  }
+</style>

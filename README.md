@@ -17,3 +17,8 @@ copy the generated categories, combinations, elements .json to `web/static/data`
 cd web/
 npm run build
 ```
+Epic helpful tip, if you are testing run
+
+```bash
+nmp run dev
+```
