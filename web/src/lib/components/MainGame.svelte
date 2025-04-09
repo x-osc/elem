@@ -48,6 +48,8 @@
         return;
       }
 
+      //I need to make an edit to check if git is commiting
+
       let category = getElementData(result)?.category;
       if (!category) {
         err = 'yeah buddy thats not gonna work';
