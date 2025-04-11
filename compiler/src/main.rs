@@ -39,7 +39,7 @@ struct Combination {
 //     .parse_next(input)
 // }
 
-fn combination<'s>(input: &mut &'s str) -> PResult<Combination> {
+fn combination(input: &mut &str) -> PResult<Combination> {
     let (result, a, b) = (
         ws(element),
         preceded(ws('='), ws(element)),
