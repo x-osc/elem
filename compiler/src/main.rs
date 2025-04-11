@@ -58,8 +58,15 @@ fn combination<'s>(input: &mut &'s str) -> PResult<Combination> {
 
 fn element<'s>(input: &mut &'s str) -> PResult<&'s str> {
     alt((
-        delimited('"', take_while(1.., |c| c != '"'), '"'),
-        take_while(1.., |c: char| c.is_alphanumeric() || c == '_'),
+        delimited(
+            '"',
+            take_while(1.., |c: char| {
+                c != '"' && c != '\r' && c != '\n' && !c.is_control()
+            }),
+            '"',
+        ),
+        take_while(1.., |c: char| c.is_alphanumeric() || c == '_' || c == ' ')
+            .map(|s: &str| s.trim()),
     ))
     .parse_next(input)
 }
