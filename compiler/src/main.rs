@@ -6,6 +6,7 @@ use winnow::{
     token::{take_till, take_until, take_while},
 };
 
+// TODO: move meta to sep struct
 #[derive(Debug)]
 enum Stmt {
     Meta { prop: String, val: String },
@@ -18,26 +19,23 @@ struct Combination {
     pub result: String,
 }
 
-// fn parse_input(input: &mut &str) -> PResult<Vec<Stmt>> {
-//     // skip initial whitespace
-//     let _ = ascii::multispace0.parse_next(input)?;
+// TODO: convert to Stmt
+fn parse_input(input: &mut &str) -> PResult<Vec<Combination>> {
+    // skip initial whitespace
+    let _ = ascii::multispace0.parse_next(input)?;
 
-//     // parse stmts
-//     repeat(
-//         0..,
-//         delimited(
-//             ascii::multispace0,
-//             alt((
-//                 comment.map(|_| None), // parse and ignore comments
-//                 parse_stmt.map(Some),
-//             )),
-//             ascii::multispace0,
-//         ),
-//     )
-//     // filter None values (comments)
-//     .map(|stmts: Vec<Option<Stmt>>| stmts.into_iter().flatten().collect())
-//     .parse_next(input)
-// }
+    // parse stmts
+    repeat(
+        0..,
+        alt((
+            comment.map(|_| None), // parse and ignore comments
+            combination.map(Some),
+        )),
+    )
+    // filter None values (comments)
+    .map(|stmts: Vec<Option<Combination>>| stmts.into_iter().flatten().collect())
+    .parse_next(input)
+}
 
 fn combination(input: &mut &str) -> PResult<Combination> {
     let (result, a, b) = (
@@ -47,6 +45,7 @@ fn combination(input: &mut &str) -> PResult<Combination> {
     )
         .parse_next(input)?;
 
+    // TODO: is this a good idea?
     let _ = opt(line_ending).parse_next(input)?;
 
     Ok(Combination {
@@ -72,9 +71,11 @@ fn element<'s>(input: &mut &'s str) -> PResult<&'s str> {
 }
 
 fn comment(input: &mut &str) -> PResult<()> {
-    ("//", take_till(1.., ['\n', '\r']))
+    ('#', take_till(1.., ['\n', '\r']))
         .void()
-        .parse_next(input)
+        .parse_next(input)?;
+    let _ = opt(line_ending).parse_next(input)?;
+    Ok(())
 }
 
 // fn take_till_end_or_comment<'s>(input: &mut &'s str) -> PResult<&'s str> {
@@ -114,7 +115,7 @@ fn main() {
     let src = std::fs::read_to_string(std::env::args().nth(1).unwrap()).unwrap();
     let mut data = src.as_str();
 
-    match combination.parse(&mut data) {
+    match parse_input.parse(&mut data) {
         Ok(res) => println!("{:?}", res),
         Err(err) => println!("{}", err),
     }
