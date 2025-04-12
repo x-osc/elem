@@ -1,6 +1,6 @@
 use winnow::{
-    ascii::{self, hex_digit1, line_ending, space0},
-    combinator::{alt, delimited, opt, preceded, repeat, repeat_till},
+    ascii::{self, hex_digit1, line_ending, multispace0, newline, space0},
+    combinator::{alt, delimited, eof, opt, preceded, repeat, repeat_till, terminated},
     error::ParserError,
     prelude::*,
     token::{take_till, take_until, take_while},
@@ -27,10 +27,17 @@ fn parse_input(input: &mut &str) -> PResult<Vec<Combination>> {
     // parse stmts
     repeat(
         0..,
-        alt((
-            comment.map(|_| None), // parse and ignore comments
-            combination.map(Some),
-        )),
+        terminated(
+            delimited(
+                space0,
+                alt((
+                    comment.map(|_| None), // parse and ignore comments
+                    combination.map(Some),
+                )),
+                space0,
+            ),
+            alt((line_ending, eof)),
+        ),
     )
     // filter None values (comments)
     .map(|stmts: Vec<Option<Combination>>| stmts.into_iter().flatten().collect())
@@ -44,9 +51,6 @@ fn combination(input: &mut &str) -> PResult<Combination> {
         preceded(ws('+'), ws(element)),
     )
         .parse_next(input)?;
-
-    // TODO: is this a good idea?
-    let _ = opt(line_ending).parse_next(input)?;
 
     Ok(Combination {
         a: a.to_string(),
@@ -71,11 +75,7 @@ fn element<'s>(input: &mut &'s str) -> PResult<&'s str> {
 }
 
 fn comment(input: &mut &str) -> PResult<()> {
-    ('#', take_till(1.., ['\n', '\r']))
-        .void()
-        .parse_next(input)?;
-    let _ = opt(line_ending).parse_next(input)?;
-    Ok(())
+    ('#', take_till(1.., ['\n', '\r'])).void().parse_next(input)
 }
 
 // fn take_till_end_or_comment<'s>(input: &mut &'s str) -> PResult<&'s str> {
