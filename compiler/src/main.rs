@@ -36,17 +36,28 @@ fn parse_input(input: &mut &str) -> PResult<Vec<Stmt>> {
             delimited(
                 multispace0,
                 alt((
-                    comment.map(|_| None), // parse and ignore comments
-                    combination.map(|s| Some(Stmt::Combination(s))),
-                    meta.map(|s| Some(Stmt::Meta(s))),
+                    stmt.map(Some),
+                    // TODO: make this not dumb
+                    comment.map(|_| None), // single line comment
                 )),
                 space0,
             ),
-            alt((line_ending, eof)),
+            (
+                opt(comment), // eol comment
+                alt((line_ending, eof)),
+            ),
         ),
     )
     // filter None values (comments)
     .map(|stmts: Vec<Option<Stmt>>| stmts.into_iter().flatten().collect())
+    .parse_next(input)
+}
+
+fn stmt(input: &mut &str) -> PResult<Stmt> {
+    alt((
+        combination.map(Stmt::Combination), //
+        meta.map(Stmt::Meta),
+    ))
     .parse_next(input)
 }
 
@@ -92,7 +103,7 @@ fn color<'s>(input: &mut &'s str) -> PResult<&'s str> {
 fn meta(input: &mut &str) -> PResult<Meta> {
     let prop = preceded(
         "@",
-        take_while(1.., |c: char| c.is_alphanumeric() || c == '_'),
+        take_while(1.., |c: char| c.is_alphanumeric() || c == '_' || c == '.'),
     )
     .parse_next(input)?;
     let _ = (opt(space0), ":", opt(space0)).parse_next(input)?;
