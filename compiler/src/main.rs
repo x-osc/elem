@@ -6,10 +6,16 @@ use winnow::{
     token::{take_till, take_until, take_while},
 };
 
-// TODO: move meta to sep struct
 #[derive(Debug)]
 enum Stmt {
-    Meta { prop: String, val: String },
+    Meta(Meta),
+    Combination(Combination),
+}
+
+#[derive(Debug)]
+struct Meta {
+    prop: String,
+    val: String,
 }
 
 #[derive(Debug)]
@@ -19,8 +25,7 @@ struct Combination {
     pub result: String,
 }
 
-// TODO: convert to Stmt
-fn parse_input(input: &mut &str) -> PResult<Vec<Combination>> {
+fn parse_input(input: &mut &str) -> PResult<Vec<Stmt>> {
     // skip initial whitespace
     let _ = ascii::multispace0.parse_next(input)?;
 
@@ -29,10 +34,11 @@ fn parse_input(input: &mut &str) -> PResult<Vec<Combination>> {
         0..,
         terminated(
             delimited(
-                space0,
+                multispace0,
                 alt((
                     comment.map(|_| None), // parse and ignore comments
-                    combination.map(Some),
+                    combination.map(|s| Some(Stmt::Combination(s))),
+                    meta.map(|s| Some(Stmt::Meta(s))),
                 )),
                 space0,
             ),
@@ -40,7 +46,7 @@ fn parse_input(input: &mut &str) -> PResult<Vec<Combination>> {
         ),
     )
     // filter None values (comments)
-    .map(|stmts: Vec<Option<Combination>>| stmts.into_iter().flatten().collect())
+    .map(|stmts: Vec<Option<Stmt>>| stmts.into_iter().flatten().collect())
     .parse_next(input)
 }
 
@@ -78,31 +84,36 @@ fn comment(input: &mut &str) -> PResult<()> {
     ('#', take_till(1.., ['\n', '\r'])).void().parse_next(input)
 }
 
-// fn take_till_end_or_comment<'s>(input: &mut &'s str) -> PResult<&'s str> {
-//     let val = repeat_till(1.., alt(comment, line_ending)).parse_next(input)?;
-//     let _ = opt(comment).parse_next(input);
-//     Ok(val.trim())
-// }
-
 fn color<'s>(input: &mut &'s str) -> PResult<&'s str> {
     let _ = '#'.parse_next(input)?;
     hex_digit1.verify(|s: &str| s.len() == 6).parse_next(input)
 }
 
-// fn prop_val(input: &mut &str) -> PResult<Stmt> {
-//     let prop = preceded("@", ascii::alphanumeric1).parse_next(input)?;
-//     let _ = (opt(space0), ":", opt(space0)).parse_next(input)?;
-//     let val = take_till_end_or_comment.parse_next(input)?;
+fn meta(input: &mut &str) -> PResult<Meta> {
+    let prop = preceded(
+        "@",
+        take_while(1.., |c: char| c.is_alphanumeric() || c == '_'),
+    )
+    .parse_next(input)?;
+    let _ = (opt(space0), ":", opt(space0)).parse_next(input)?;
+    let val = alt((
+        delimited(
+            '"',
+            take_while(1.., |c: char| {
+                c != '"' && c != '\r' && c != '\n' && !c.is_control()
+            }),
+            '"',
+        ),
+        take_while(1.., |c: char| c.is_alphanumeric() || c == '_' || c == ' ')
+            .map(|s: &str| s.trim()),
+    ))
+    .parse_next(input)?;
 
-//     Ok(Stmt::Meta {
-//         prop: prop.to_string(),
-//         val: val.to_string(),
-//     })
-// }
-
-// fn parse_stmt(input: &mut &str) -> PResult<Stmt> {
-//     prop_val.parse_next(input)
-// }
+    Ok(Meta {
+        prop: prop.to_string(),
+        val: val.to_string(),
+    })
+}
 
 fn ws<'a, F, O, E: ParserError<&'a str>>(inner: F) -> impl Parser<&'a str, O, E>
 where
