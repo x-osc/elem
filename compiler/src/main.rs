@@ -1,9 +1,10 @@
 use winnow::{
-    ascii::{self, hex_digit1, line_ending, multispace0, newline, space0},
-    combinator::{alt, delimited, eof, opt, preceded, repeat, repeat_till, terminated},
+    Result,
+    ascii::{self, hex_digit1, line_ending, multispace0, space0},
+    combinator::{alt, delimited, eof, opt, preceded, repeat, terminated},
     error::ParserError,
     prelude::*,
-    token::{take_till, take_until, take_while},
+    token::{take_till, take_while},
 };
 
 #[derive(Debug)]
@@ -25,7 +26,7 @@ struct Combination {
     pub result: String,
 }
 
-fn parse_input(input: &mut &str) -> PResult<Vec<Stmt>> {
+fn parse_input(input: &mut &str) -> Result<Vec<Stmt>> {
     // skip initial whitespace
     let _ = ascii::multispace0.parse_next(input)?;
 
@@ -53,7 +54,7 @@ fn parse_input(input: &mut &str) -> PResult<Vec<Stmt>> {
     .parse_next(input)
 }
 
-fn stmt(input: &mut &str) -> PResult<Stmt> {
+fn stmt(input: &mut &str) -> Result<Stmt> {
     alt((
         combination.map(Stmt::Combination), //
         meta.map(Stmt::Meta),
@@ -61,7 +62,7 @@ fn stmt(input: &mut &str) -> PResult<Stmt> {
     .parse_next(input)
 }
 
-fn combination(input: &mut &str) -> PResult<Combination> {
+fn combination(input: &mut &str) -> Result<Combination> {
     let (result, a, b) = (
         ws(element),
         preceded(ws('='), ws(element)),
@@ -76,7 +77,7 @@ fn combination(input: &mut &str) -> PResult<Combination> {
     })
 }
 
-fn element<'s>(input: &mut &'s str) -> PResult<&'s str> {
+fn element<'s>(input: &mut &'s str) -> Result<&'s str> {
     alt((
         delimited(
             '"',
@@ -91,16 +92,16 @@ fn element<'s>(input: &mut &'s str) -> PResult<&'s str> {
     .parse_next(input)
 }
 
-fn comment(input: &mut &str) -> PResult<()> {
+fn comment(input: &mut &str) -> Result<()> {
     ('#', take_till(1.., ['\n', '\r'])).void().parse_next(input)
 }
 
-fn color<'s>(input: &mut &'s str) -> PResult<&'s str> {
+fn color<'s>(input: &mut &'s str) -> Result<&'s str> {
     let _ = '#'.parse_next(input)?;
     hex_digit1.verify(|s: &str| s.len() == 6).parse_next(input)
 }
 
-fn meta(input: &mut &str) -> PResult<Meta> {
+fn meta(input: &mut &str) -> Result<Meta> {
     let prop = preceded(
         "@",
         take_while(1.., |c: char| c.is_alphanumeric() || c == '_' || c == '.'),
