@@ -63,6 +63,25 @@ fn stmt(input: &mut &str) -> Result<Stmt> {
 }
 
 fn combination(input: &mut &str) -> Result<Combination> {
+    alt((combination_res_first, combination_res_last)).parse_next(input)
+}
+
+fn combination_res_last(input: &mut &str) -> Result<Combination> {
+    let (a, b, result) = (
+        ws(element),
+        preceded(ws('+'), ws(element)),
+        preceded(ws('='), ws(element)),
+    )
+        .parse_next(input)?;
+
+    Ok(Combination {
+        a: a.to_string(),
+        b: b.to_string(),
+        result: result.to_string(),
+    })
+}
+
+fn combination_res_first(input: &mut &str) -> Result<Combination> {
     let (result, a, b) = (
         ws(element),
         preceded(ws('='), ws(element)),
