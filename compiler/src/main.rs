@@ -15,7 +15,7 @@ fn main() {
     };
 
     match parse_str(&src) {
-        Ok(res) => println!("{res:?}"),
+        Ok(res) => println!("{res:#?}"),
         Err(err) => println!("{err}"),
     }
 }
