@@ -11,6 +11,7 @@ use winnow::{
 enum Stmt {
     Meta(Meta),
     Combination(Combination),
+    Element(Element),
     CombinationWithElement(CombinationWithElement),
 }
 
@@ -66,8 +67,9 @@ fn parse_input(input: &mut &str) -> Result<Vec<Stmt>> {
 
 fn stmt(input: &mut &str) -> Result<Stmt> {
     // the ordering is important or else a combination with element gets parsed
-    // by combination() and combination_with_element() never gets called 
+    // by combination() and combination_with_element() never gets called
     alt((
+        element.map(Stmt::Element),
         combination_with_element.map(Stmt::CombinationWithElement),
         combination.map(Stmt::Combination),
         meta.map(Stmt::Meta),
@@ -79,14 +81,25 @@ fn combination_with_element(input: &mut &str) -> Result<CombinationWithElement> 
     let combination = combination.parse_next(input)?;
     let _ = ascii::space1(input)?;
     let category = category_label.parse_next(input)?;
-    let element_name = combination.result.clone();
+    let result_name = combination.result.clone();
 
     Ok(CombinationWithElement {
         element: Element {
-            name: element_name,
+            name: result_name,
             category: category.to_owned(),
         },
         combination,
+    })
+}
+
+fn element(input: &mut &str) -> Result<Element> {
+    let name = element_name.parse_next(input)?;
+    let _ = ascii::space1(input)?;
+    let category = category_label.parse_next(input)?;
+
+    Ok(Element {
+        name: name.to_owned(),
+        category: category.to_owned(),
     })
 }
 
@@ -96,9 +109,9 @@ fn combination(input: &mut &str) -> Result<Combination> {
 
 fn combination_res_last(input: &mut &str) -> Result<Combination> {
     let (a, b, result) = (
-        ws(element),
-        preceded(ws('+'), element),
-        preceded(ws('='), element),
+        ws(element_name),
+        preceded(ws('+'), element_name),
+        preceded(ws('='), element_name),
     )
         .parse_next(input)?;
 
@@ -111,9 +124,9 @@ fn combination_res_last(input: &mut &str) -> Result<Combination> {
 
 fn combination_res_first(input: &mut &str) -> Result<Combination> {
     let (result, a, b) = (
-        ws(element),
-        preceded(ws('='), element),
-        preceded(ws('+'), element),
+        ws(element_name),
+        preceded(ws('='), element_name),
+        preceded(ws('+'), element_name),
     )
         .parse_next(input)?;
 
@@ -130,7 +143,7 @@ fn category_label<'s>(input: &mut &'s str) -> Result<&'s str> {
 }
 
 /// single element name parser
-fn element<'s>(input: &mut &'s str) -> Result<&'s str> {
+fn element_name<'s>(input: &mut &'s str) -> Result<&'s str> {
     alt((
         delimited(
             '"',
