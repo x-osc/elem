@@ -11,6 +11,7 @@ use winnow::{
 enum Stmt {
     Meta(Meta),
     Combination(Combination),
+    CombinationWithElement(CombinationWithElement),
 }
 
 #[derive(Debug)]
@@ -20,16 +21,25 @@ struct Meta {
 }
 
 #[derive(Debug)]
+struct CombinationWithElement {
+    pub element: Element,
+    pub combination: Combination,
+}
+
+#[derive(Debug)]
 struct Combination {
     pub a: String,
     pub b: String,
     pub result: String,
 }
 
-fn parse_input(input: &mut &str) -> Result<Vec<Stmt>> {
-    // skip initial whitespace
-    let _ = ascii::multispace0.parse_next(input)?;
+#[derive(Debug)]
+struct Element {
+    pub name: String,
+    pub category: String,
+}
 
+fn parse_input(input: &mut &str) -> Result<Vec<Stmt>> {
     // parse stmts
     repeat(
         0..,
@@ -55,11 +65,29 @@ fn parse_input(input: &mut &str) -> Result<Vec<Stmt>> {
 }
 
 fn stmt(input: &mut &str) -> Result<Stmt> {
+    // the ordering is important or else a combination with element gets parsed
+    // by combination() and combination_with_element() never gets called 
     alt((
-        combination.map(Stmt::Combination), //
+        combination_with_element.map(Stmt::CombinationWithElement),
+        combination.map(Stmt::Combination),
         meta.map(Stmt::Meta),
     ))
     .parse_next(input)
+}
+
+fn combination_with_element(input: &mut &str) -> Result<CombinationWithElement> {
+    let combination = combination.parse_next(input)?;
+    let _ = ascii::space1(input)?;
+    let category = category_label.parse_next(input)?;
+    let element_name = combination.result.clone();
+
+    Ok(CombinationWithElement {
+        element: Element {
+            name: element_name,
+            category: category.to_owned(),
+        },
+        combination,
+    })
 }
 
 fn combination(input: &mut &str) -> Result<Combination> {
@@ -69,8 +97,8 @@ fn combination(input: &mut &str) -> Result<Combination> {
 fn combination_res_last(input: &mut &str) -> Result<Combination> {
     let (a, b, result) = (
         ws(element),
-        preceded(ws('+'), ws(element)),
-        preceded(ws('='), ws(element)),
+        preceded(ws('+'), element),
+        preceded(ws('='), element),
     )
         .parse_next(input)?;
 
@@ -84,8 +112,8 @@ fn combination_res_last(input: &mut &str) -> Result<Combination> {
 fn combination_res_first(input: &mut &str) -> Result<Combination> {
     let (result, a, b) = (
         ws(element),
-        preceded(ws('='), ws(element)),
-        preceded(ws('+'), ws(element)),
+        preceded(ws('='), element),
+        preceded(ws('+'), element),
     )
         .parse_next(input)?;
 
@@ -96,6 +124,12 @@ fn combination_res_first(input: &mut &str) -> Result<Combination> {
     })
 }
 
+/// label for a combination
+fn category_label<'s>(input: &mut &'s str) -> Result<&'s str> {
+    delimited('(', ws(name_with_spaces), ')').parse_next(input)
+}
+
+/// single element name parser
 fn element<'s>(input: &mut &'s str) -> Result<&'s str> {
     alt((
         delimited(
@@ -105,10 +139,23 @@ fn element<'s>(input: &mut &'s str) -> Result<&'s str> {
             }),
             '"',
         ),
-        take_while(1.., |c: char| c.is_alphanumeric() || c == '_' || c == ' ')
-            .map(|s: &str| s.trim()),
+        name_with_spaces,
     ))
     .parse_next(input)
+}
+
+fn name_with_spaces<'s>(input: &mut &'s str) -> Result<&'s str> {
+    (
+        take_while(1.., is_word_char),
+        // have to specify the accumulator even though were gonna take() everything anyway
+        repeat::<_, _, String, _, _>(0.., preceded(ascii::space1, take_while(1.., is_word_char))),
+    )
+        .take()
+        .parse_next(input)
+}
+
+fn is_word_char(c: char) -> bool {
+    c.is_alphanumeric() || c == '_'
 }
 
 fn comment(input: &mut &str) -> Result<()> {

@@ -1,5 +1,11 @@
+
+
 @title: elem  # coment
 
 Mist = Air + Water
+Wind      =      Air     +     Air        
 # epic comment
-Air + Earth = Dust # moar comment
+Air    +    Earth    =    Dust     # moar comment
+  Earth + Fire = Lava (Fire) #even more comments
+Mud = Earth + Water       (  Earth )
+"String With Random Characters   !#$%$^&*" + Mist = "! # $ % $ ^ & *"
