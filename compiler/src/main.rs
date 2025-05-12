@@ -66,8 +66,8 @@ fn parse_input(input: &mut &str) -> Result<Vec<Stmt>> {
 }
 
 fn stmt(input: &mut &str) -> Result<Stmt> {
-    // the ordering is important or else a combination with element gets parsed
-    // by combination() and combination_with_element() never gets called
+    // the ordering is important or else a combination with element gets parsed by
+    // combination() and combination_with_element() never gets called
     alt((
         element.map(Stmt::Element),
         combination_with_element.map(Stmt::CombinationWithElement),
