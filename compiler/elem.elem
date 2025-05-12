@@ -1,0 +1,23 @@
+@title: elem
+
+(Air)
+(Water)
+(Fire)
+(Earth)
+
+Air (Air)
+Water (Water)
+Fire (Fire)
+Earth (Earth)
+
+Air + Air = Wind (Air)
+Water + Water = Puddle (Water)
+Fire + Fire = Big Fire (Fire)
+Earth + Earth = Land (Earth)
+
+Air + Water = Mist (Water)
+Air + Earth = Dust (Earth)
+Air + Fire = Smoke (Air)
+Fire + Water = Steam (Air)
+Fire + Earth = Lava (Fire)
+Earth + Water = Mud (Earth)
