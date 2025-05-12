@@ -12,6 +12,7 @@ use winnow::{
 #[derive(Debug, PartialEq, Eq)]
 pub enum Stmt {
     Meta(Meta),
+    Category(Category),
     Combination(Combination),
     Element(Element),
     CombinationWithElement(CombinationWithElement),
@@ -21,6 +22,11 @@ pub enum Stmt {
 pub struct Meta {
     pub prop: String,
     pub val: String,
+}
+
+#[derive(Debug, PartialEq, Eq)]
+pub struct Category {
+    pub name: String,
 }
 
 #[derive(Debug, PartialEq, Eq)]
@@ -76,12 +82,45 @@ fn stmt(input: &mut &str) -> Result<Stmt> {
     // the ordering is important or else a combination with element gets parsed by
     // combination() and combination_with_element() never gets called
     alt((
-        element.map(Stmt::Element),
         combination_with_element.map(Stmt::CombinationWithElement),
         combination.map(Stmt::Combination),
+        element.map(Stmt::Element),
+        category.map(Stmt::Category),
         meta.map(Stmt::Meta),
     ))
     .parse_next(input)
+}
+
+fn meta(input: &mut &str) -> Result<Meta> {
+    let prop = preceded(
+        "@",
+        take_while(1.., |c: char| c.is_alphanumeric() || c == '_' || c == '.'),
+    )
+    .parse_next(input)?;
+    let _ = (opt(space0), ":", opt(space0)).parse_next(input)?;
+    let val = alt((
+        delimited(
+            '"',
+            take_while(1.., |c: char| {
+                c != '"' && c != '\r' && c != '\n' && !c.is_control()
+            }),
+            '"',
+        ),
+        take_while(1.., |c: char| c.is_alphanumeric() || c == '_' || c == ' ')
+            .map(|s: &str| s.trim()),
+    ))
+    .parse_next(input)?;
+
+    Ok(Meta {
+        prop: prop.to_string(),
+        val: val.to_string(),
+    })
+}
+
+fn category(input: &mut &str) -> Result<Category> {
+    let name = category_label.parse_next(input)?;
+
+    Ok(Category { name: name.to_owned() })
 }
 
 fn combination_with_element(input: &mut &str) -> Result<CombinationWithElement> {
@@ -187,32 +226,6 @@ fn color<'s>(input: &mut &'s str) -> Result<&'s str> {
     hex_digit1.verify(|s: &str| s.len() == 6).parse_next(input)
 }
 
-fn meta(input: &mut &str) -> Result<Meta> {
-    let prop = preceded(
-        "@",
-        take_while(1.., |c: char| c.is_alphanumeric() || c == '_' || c == '.'),
-    )
-    .parse_next(input)?;
-    let _ = (opt(space0), ":", opt(space0)).parse_next(input)?;
-    let val = alt((
-        delimited(
-            '"',
-            take_while(1.., |c: char| {
-                c != '"' && c != '\r' && c != '\n' && !c.is_control()
-            }),
-            '"',
-        ),
-        take_while(1.., |c: char| c.is_alphanumeric() || c == '_' || c == ' ')
-            .map(|s: &str| s.trim()),
-    ))
-    .parse_next(input)?;
-
-    Ok(Meta {
-        prop: prop.to_string(),
-        val: val.to_string(),
-    })
-}
-
 fn ws<'a, F, O, E: ParserError<&'a str>>(inner: F) -> impl Parser<&'a str, O, E>
 where
     F: Parser<&'a str, O, E>,
@@ -230,6 +243,9 @@ mod tests {
 
 
             @title: elem  # coment
+
+                 (Earth)
+            ( Fire Man  )
 
             Mist = Air + Water
             Wind      =      Air     +     Air        
@@ -256,6 +272,12 @@ mod tests {
             Stmt::Meta(Meta {
                 prop: "title".into(),
                 val: "elem".into(),
+            }),
+            Stmt::Category(Category {
+                name: "Earth".into(),
+            }),
+            Stmt::Category(Category {
+                name: "Fire Man".into(),
             }),
             Stmt::Combination(Combination {
                 a: "Air".into(),
