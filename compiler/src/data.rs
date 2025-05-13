@@ -39,6 +39,43 @@ pub struct ElementData {
     pub tier: i32,
 }
 
+pub fn get_lowest_combinations(data: &GameData) -> Vec<((String, String), i32)> {
+    let elem_ids: Vec<_> = data.elements.keys().collect();
+    let mut all_combinations: Vec<(String, String)> = Vec::new();
+
+    for i in 0..elem_ids.len() {
+        // start iter at i (i == j) to allow self pairs but not duplicates
+        for j in i..elem_ids.len() {
+            all_combinations.push((elem_ids[i].clone(), elem_ids[j].clone()));
+        }
+    }
+
+    let all_combinations = all_combinations.iter().filter(|(elem1, elem2)| {
+        !(data.combinations.contains_key(&format!("{elem1}|{elem2}"))
+            || data.combinations.contains_key(&format!("{elem2}|{elem1}")))
+    });
+
+    let mut combinations_with_tier: Vec<((String, String), i32)> = Vec::new();
+
+    let mut computed_tiers: HashMap<String, i32> = HashMap::from([
+        ("Air".into(), 1),
+        ("Earth".into(), 1),
+        ("Fire".into(), 1),
+        ("Water".into(), 1),
+    ]);
+
+    for (elem1, elem2) in all_combinations {
+        let t1 = compute_tier(elem1, data, &mut computed_tiers);
+        let t2 = compute_tier(elem2, data, &mut computed_tiers);
+        let tier = std::cmp::max(t1, t2) + 1;
+        combinations_with_tier.push(((elem1.clone(), elem2.clone()), tier));
+    }
+
+    combinations_with_tier.sort_by_key(|(_, tier)| *tier);
+
+    combinations_with_tier
+}
+
 pub fn stmts_to_data(stmts: Vec<Stmt>) -> Result<GameData, String> {
     let mut data = GameData::new();
 

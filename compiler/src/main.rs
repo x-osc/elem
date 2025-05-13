@@ -3,7 +3,7 @@ use std::{
     fs::{self},
 };
 
-use data::stmts_to_data;
+use data::{get_lowest_combinations, stmts_to_data};
 use parser::parse_str;
 use save::{JsonFiles, data_to_files};
 
@@ -38,6 +38,10 @@ fn main() {
         }
     };
 
+    for ((elem1, elem2), tier) in get_lowest_combinations(&data).iter().take(200) {
+        println!("{elem1} | {elem2} : {tier}")
+    }
+
     let JsonFiles {
         elements,
         categories,
@@ -54,5 +58,10 @@ fn main() {
     fs::write("categories.json", &categories).unwrap();
     fs::write("combinations.json", &combinations).unwrap();
 
-    println!("wrote {} categories, {} elements, and {} combinations", data.categories.len(), data.elements.len(), data.combinations.len());
+    println!(
+        "wrote {} categories, {} elements, and {} combinations",
+        data.categories.len(),
+        data.elements.len(),
+        data.combinations.len()
+    );
 }
