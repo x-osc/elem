@@ -1,10 +1,12 @@
 use std::{env::args, fs::read_to_string};
 
 use parser::parse_str;
-use save::stmts_to_json;
+use data::stmts_to_data;
+use save::{data_to_files, JsonFiles};
 
 mod color;
 mod parser;
+mod data;
 mod save;
 
 fn main() {
@@ -25,13 +27,21 @@ fn main() {
         }
     };
 
-    let json_formatted = match stmts_to_json(stmts) {
+    let data = match stmts_to_data(stmts) {
         Ok(res) => res,
         Err(err) => {
             println!("{err}");
             return;
         }
     };
-    
-    println!("{json_formatted:#?}")
+
+    let JsonFiles { elements, categories, combinations } = match data_to_files(data) {
+        Ok(files) => files,
+        Err(err) => {
+            println!("{err}");
+            return;
+        }
+    };
+
+    println!("{elements}\n{categories}\n{combinations}")
 }

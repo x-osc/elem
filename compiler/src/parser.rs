@@ -120,7 +120,9 @@ fn meta(input: &mut &str) -> Result<Meta> {
 fn category(input: &mut &str) -> Result<Category> {
     let name = category_label.parse_next(input)?;
 
-    Ok(Category { name: name.to_owned() })
+    Ok(Category {
+        name: name.to_owned(),
+    })
 }
 
 fn combination_with_element(input: &mut &str) -> Result<CombinationWithElement> {

@@ -1,5 +1,7 @@
 use std::{fmt, str::FromStr};
 
+use serde::{Deserialize, Serialize, de};
+
 #[derive(Debug, PartialEq, Eq)]
 pub struct HexColor {
     pub r: u8,
@@ -28,5 +30,24 @@ impl FromStr for HexColor {
 impl fmt::Display for HexColor {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "#{:02x}{:02x}{:02x}", self.r, self.g, self.b)
+    }
+}
+
+impl Serialize for HexColor {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::Serializer,
+    {
+        serializer.collect_str(&self)
+    }
+}
+
+impl<'de> Deserialize<'de> for HexColor {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: serde::Deserializer<'de>,
+    {
+        let s = String::deserialize(deserializer)?;
+        FromStr::from_str(&s).map_err(de::Error::custom)
     }
 }
