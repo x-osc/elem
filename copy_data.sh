@@ -1,5 +1,5 @@
 cd ./compiler/
-cargo run -- elem.elem
+cargo run -- ../elem.elem
 cd ../
 cp ./compiler/categories.json ./web/static/data/categories.json
 cp ./compiler/elements.json ./web/static/data/elements.json

@@ -1,1 +1,1 @@
-{"air": {"name": "Air", "color": "#97dafb"}, "earth": {"name": "Earth", "color": "#734f31"}, "fire": {"name": "Fire", "color": "#f57f43"}, "water": {"name": "Water", "color": "#5177f3"}, "rock": {"name": "Rock", "color": "#555555"}}
+{"Space":{"name":"Space","color":"#814ad2"},"Water":{"name":"Water","color":"#5177f3"},"Rock":{"name":"Rock","color":"#555555"},"Fire":{"name":"Fire","color":"#f57f43"},"Earth":{"name":"Earth","color":"#734f31"},"Air":{"name":"Air","color":"#97dafb"}}

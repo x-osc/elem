@@ -1,0 +1,139 @@
+@title: elem
+
+(Air) [#97dafb]
+(Water) [#5177f3]
+(Fire) [#f57f43]
+(Earth) [#734f31]
+(Space) [#814ad2]
+(Rock) [#555555]
+
+Air (Air)
+Water (Water)
+Fire (Fire)
+Earth (Earth)
+
+Air + Water = Mist (Water)
+Air + Earth = Dust (Earth)
+Air + Fire = Smoke (Air)
+Fire + Water = Steam (Air)
+Fire + Earth = Lava (Fire)
+Earth + Water = Mud (Earth)
+
+Wind = Air + Air (Air)
+Gale = Wind + Wind (Air)
+Breeze = Wind + Air (Air)
+Tornado = Gale + Gale (Air)
+
+Mist = Air + Steam
+Fog = Mist + Smoke (Air)
+Smog = Smoke + Fog (Air)
+Cloud = Mist + Air (Air)
+Rain Cloud = Cloud + Water (Air)
+Rain = Rain Cloud + Water (Water)
+
+Pollution = Air + Smog (Air)
+Dust Pollution = Dust + Pollution (Air)
+Global Pollution = Planet + Pollution (Air)
+Acid Rain = Pollution + Rain (Water)
+Acid Pollution = Acid Rain + Pollution (Air)
+
+Storm = Rain + Gale (Air)
+Rain Storm = Rain + Storm (Water)
+Wind Storm = Wind + Storm (Air)
+Wind Storm = Gale + Storm
+Hurricane = Tornado + Rain Storm (Water)
+
+Water Drop = Water + Water (Water)
+Puddle (Water)
+Large Puddle = Puddle + Puddle (Water)
+
+Lake = Water + Land (Water)
+Ocean = Lake + Lake (Water)
+Ocean World = Ocean + Ocean (Water)
+
+Ripples = Lake + Wind (Water)
+Ripples = Lake + Breeze
+Wave = Ocean + Wind (Water)
+Big Wave = Ocean + Gale (Water)
+
+Big Fire = Fire + Fire (Fire)
+Bigger Fire = Big Fire + Big Fire (Fire)
+Biggest Fire = Bigger Fire + Bigger Fire (Fire)
+Biggerest Fire = Bigger Fire + Biggest Fire (Fire)
+
+Lava Puddle = Lava + Lava (Fire)
+Lava Lake = Lava Puddle + Lava Puddle (Fire)
+Lava Ocean = Lava Lake + Lava Lake (Fire)
+
+Hell = Lava Ocean + Biggest Fire (Fire)
+
+Volcano = Mountain + Lava (Fire)
+Supervolcano = Volcano + Volcano (Fire)
+
+Ash = Dust + Fire (Earth)
+Dust Bunny = Dust + Dust (Earth)
+
+Ground = Earth + Earth (Earth)
+Land = Ground + Ground (Earth)
+Continent = Land + Land (Earth)
+Supercontinent = Continent + Continent (Earth)
+Superdupercontinent = Supercontinent + Supercontinent (Earth)
+
+Dirt = Ground + Earth (Earth)
+Dirt Pile = Dirt + Dirt (Earth)
+Big Dirt Pile = Dirt Pile + Earth (Earth)
+Bigger Dirt Pile = Big Dirt Pile + Earth (Earth)
+Even Bigger Dirt Pile = Bigger Dirt Pile + Earth (Earth)
+
+Mound = Dirt Pile + Dirt Pile (Earth)
+Hill = Mound + Mound (Earth)
+Hill + Hill = Tall Hill (Earth)
+
+Island = Land + Ocean (Earth)
+Swamp = Mud + Lake (Earth)
+
+Clay = Sand + Mud (Earth)
+Brick = Fire + Clay (Earth)
+Brick Wall = Brick + Brick (Earth)
+Brick House = Brick Wall + Brick Wall (Earth)
+
+Planet = Supercontinent + Ocean (Space)
+Planet Earth = Planet + Earth (Space)
+Jupiter = Storm + Planet (Space)
+Mars = Desert + Planet (Space)
+Venus = Pollution + Planet (Space)
+Venus = Acid Rain + Planet
+
+Glass = Sand + Fire (Rock)
+Obsidian = Lava + Water (Rock)
+Igneous Rock = Lava + Air (Rock)
+Igneous Rock = Lava + Mist
+Igneous Rock = Lava + Steam
+Pumice = Lava + Ocean (Rock)
+Pumice = Igneous Rock + Air
+Pebble = Igneous Rock + Ocean (Rock)
+Pile of Pebbles = Pebble + Pebble (Rock)
+Large Pile of Pebbles = Pile of Pebbles + Pile of Pebbles (Rock)
+
+# burnt things
+Burnt Igneous Rock = Igneous Rock + Fire (Rock)
+
+# melted things
+Melted Rock = Lava + Igneous Rock (Rock)
+
+# soil types
+Sandy Soil = Sand + Earth (Earth)
+Silt = Sand + Clay (Earth)
+Loam = Silt + Earth (Earth)
+Pumice Soil = Pumice + Earth (Earth)
+
+Sand = Pebble + Ocean (Earth)
+Pile of Sand = Sand + Sand (Earth)
+Beach = Sand + Ocean (Water)
+Sand Dune = Wind + Beach (Earth)
+Sand Dune = Breeze + Beach
+Desert (Earth)
+Oasis = Lake + Desert (Water)
+
+Mountain (Rock)
+Mountain Range = Mountain + Mountain (Rock)
