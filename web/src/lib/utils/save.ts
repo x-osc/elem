@@ -1,5 +1,5 @@
 import { browser } from "$app/environment";
-import { elementExists, getElementData } from "./data";
+import { elementExists, getElementData, getCategoryData } from "./data";
 
 export type ElementState = { [key: string]: string[] };
 const key = "gamesave";
@@ -65,6 +65,22 @@ export function loadGameSlow(): ElementState {
     if (save[category].length === 0) {
       delete save[category];
     }
+  }
+
+  if (!save.hasOwnProperty("Air")) {
+    save["Air"] = ["Air"]
+  }
+
+  if (!save.hasOwnProperty("Earth")) {
+    save["Earth"] = ["Earth"]
+  }
+
+  if (!save.hasOwnProperty("Fire")) {
+    save["Fire"] = ["Fire"]
+  }
+
+  if (!save.hasOwnProperty("Water")) {
+    save["Water"] = ["Water"]
   }
 
   return save;
