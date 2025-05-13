@@ -5,15 +5,18 @@ stupid element game
 
 ## how to build
 
-edit `config/src/configuration/main.py` file to add elements or whatever
+```sh
+git clone https://github.com/x-osc/elem
+```
+edit `compiler/elem.elem` file to add elements or whatever
 
-```bash
-cd config/
-python src/main.py
+```sh
+cd compiler/
+cargo run -- elem.elem
 ```
 copy the generated categories, combinations, elements .json to `web/static/data`
 
-```bash
+```sh
 cd web/
 npm run build
 ```

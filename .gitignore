@@ -5,3 +5,7 @@
 /config/categories.json
 /config/combinations.json
 /config/elements.json
+
+/compiler/categories.json
+/compiler/combinations.json
+/compiler/elements.json
