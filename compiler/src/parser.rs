@@ -1,4 +1,4 @@
-use std::result;
+use std::{result, str::FromStr};
 
 use winnow::{
     Result,
@@ -8,6 +8,8 @@ use winnow::{
     prelude::*,
     token::{take_till, take_while},
 };
+
+use crate::color::HexColor;
 
 #[derive(Debug, PartialEq, Eq)]
 pub enum Stmt {
@@ -27,6 +29,7 @@ pub struct Meta {
 #[derive(Debug, PartialEq, Eq)]
 pub struct Category {
     pub name: String,
+    pub color: Option<HexColor>,
 }
 
 #[derive(Debug, PartialEq, Eq)]
@@ -119,9 +122,11 @@ fn meta(input: &mut &str) -> Result<Meta> {
 
 fn category(input: &mut &str) -> Result<Category> {
     let name = category_label.parse_next(input)?;
+    let color = opt(preceded(space0, color_label)).parse_next(input)?;
 
     Ok(Category {
         name: name.to_owned(),
+        color,
     })
 }
 
@@ -223,9 +228,16 @@ fn comment(input: &mut &str) -> Result<()> {
     ('#', take_till(1.., ['\n', '\r'])).void().parse_next(input)
 }
 
-fn color<'s>(input: &mut &'s str) -> Result<&'s str> {
+fn color_label(input: &mut &str) -> Result<HexColor> {
+    delimited("[", color, "]").parse_next(input)
+}
+
+fn color(input: &mut &str) -> Result<HexColor> {
     let _ = '#'.parse_next(input)?;
-    hex_digit1.verify(|s: &str| s.len() == 6).parse_next(input)
+    let str = hex_digit1
+        .verify(|s: &str| s.len() == 6)
+        .parse_next(input)?;
+    Ok(HexColor::from_str(str).unwrap())
 }
 
 fn ws<'a, F, O, E: ParserError<&'a str>>(inner: F) -> impl Parser<&'a str, O, E>

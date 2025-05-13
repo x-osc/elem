@@ -97,7 +97,7 @@ fn combination_to_data(
 }
 
 fn category_to_data(category: Category, data: &GameData) -> Result<(String, CategoryData), String> {
-    let Category { name } = category;
+    let Category { name, color } = category;
 
     let id = name.clone();
     if data.categories.contains_key(&id) {
@@ -108,7 +108,7 @@ fn category_to_data(category: Category, data: &GameData) -> Result<(String, Cate
         id,
         CategoryData {
             name,
-            color: HexColor::from_str("#555555").unwrap(),
+            color: color.unwrap_or(HexColor::from_str("#000000").unwrap()),
         },
     ))
 }
@@ -125,12 +125,14 @@ fn element_to_data(element: Element, data: &GameData) -> Result<(String, Element
         return Err(format!("Category {category} not yet declared"));
     }
 
+    let color = data.categories.get(&category_id).unwrap().color.clone();
+
     Ok((
         id,
         ElementData {
             name,
             category: category_id,
-            color: HexColor::from_str("#555555").unwrap(),
+            color: color,
             tier: 1,
         },
     ))
