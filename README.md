@@ -7,6 +7,7 @@ stupid element game
 
 ```sh
 git clone https://github.com/x-osc/elem
+cd elem
 ```
 edit `compiler/elem.elem` file to add elements or whatever
 
@@ -18,5 +19,6 @@ copy the generated categories, combinations, elements .json to `web/static/data`
 
 ```sh
 cd web/
-npm run build
+npm install
+npm run dev
 ```
