@@ -76,18 +76,19 @@ fn combination_to_data(
     combination: Combination,
     data: &GameData,
 ) -> Result<(String, String), String> {
-    let a_id = combination.a;
-    let b_id = combination.b;
-    let res_id = combination.result;
+    let Combination { a, b, result } = combination;
+    let a_id = a.clone();
+    let b_id = b.clone();
+    let res_id = result.clone();
 
     if !data.elements.contains_key(&a_id) {
-        return Err("Element a is not declared".into());
+        return Err(format!("Element {a} is not declared"));
     }
     if !data.elements.contains_key(&b_id) {
-        return Err("Element b is not declared".into());
+        return Err(format!("Element {a} is not declared"));
     }
     if !data.elements.contains_key(&res_id) {
-        return Err("Result element is not declared".into());
+        return Err(format!("Element {result} is not declared"));
     }
 
     let id = format!("{a_id}|{b_id}");
@@ -100,7 +101,7 @@ fn category_to_data(category: Category, data: &GameData) -> Result<(String, Cate
 
     let id = name.clone();
     if data.categories.contains_key(&id) {
-        return Err("Category already declared".into());
+        return Err(format!("Category {name} already declared"));
     }
 
     Ok((
@@ -118,10 +119,10 @@ fn element_to_data(element: Element, data: &GameData) -> Result<(String, Element
     let id = name.clone();
     let category_id = category.clone();
     if data.elements.contains_key(&id) {
-        return Err("Element already declared".into());
+        return Err(format!("Element {name} already declared"));
     }
     if !data.categories.contains_key(&category_id) {
-        return Err("Category not yet declared".into());
+        return Err(format!("Category {category} not yet declared"));
     }
 
     Ok((

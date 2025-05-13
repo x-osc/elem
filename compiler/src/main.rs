@@ -42,7 +42,7 @@ fn main() {
         elements,
         categories,
         combinations,
-    } = match data_to_files(data) {
+    } = match data_to_files(&data) {
         Ok(files) => files,
         Err(err) => {
             println!("{err}");
@@ -50,7 +50,9 @@ fn main() {
         }
     };
 
-    fs::write("elements.json", elements).unwrap();
-    fs::write("categories.json", categories).unwrap();
-    fs::write("combinations.json", combinations).unwrap();
+    fs::write("elements.json", &elements).unwrap();
+    fs::write("categories.json", &categories).unwrap();
+    fs::write("combinations.json", &combinations).unwrap();
+
+    println!("wrote {} categories, {} elements, and {} combinations", data.categories.len(), data.elements.len(), data.combinations.len());
 }
