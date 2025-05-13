@@ -2,6 +2,7 @@ import { base } from "$app/paths";
 
 export type CategoryData = {
   name: string;
+  amount: number;
 };
 
 export type ElementData = {

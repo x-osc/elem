@@ -28,6 +28,7 @@ impl GameData {
 pub struct CategoryData {
     pub name: String,
     pub color: HexColor,
+    pub amount: i32,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -86,6 +87,12 @@ pub fn stmts_to_data(stmts: Vec<Stmt>) -> Result<GameData, String> {
         }
     }
 
+    let cat_keys: Vec<_> = data.categories.keys().cloned().collect();
+    for category_id in cat_keys {
+        let amount: i32 = data.elements.iter().filter(|(_id, elem)| elem.category == category_id).count() as i32;
+        data.categories.get_mut(&category_id).unwrap().amount = amount;
+    }
+
     Ok(data)
 }
 
@@ -135,6 +142,7 @@ fn category_to_data(
             color: color
                 .clone()
                 .unwrap_or(HexColor::from_str("#000000").unwrap()),
+            amount: 0,
         },
     ))
 }
