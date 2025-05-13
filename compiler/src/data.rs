@@ -89,11 +89,53 @@ pub fn stmts_to_data(stmts: Vec<Stmt>) -> Result<GameData, String> {
 
     let cat_keys: Vec<_> = data.categories.keys().cloned().collect();
     for category_id in cat_keys {
-        let amount: i32 = data.elements.iter().filter(|(_id, elem)| elem.category == category_id).count() as i32;
+        let amount: i32 = data
+            .elements
+            .iter()
+            .filter(|(_id, elem)| elem.category == category_id)
+            .count() as i32;
         data.categories.get_mut(&category_id).unwrap().amount = amount;
     }
 
+    let mut computed_tiers: HashMap<String, i32> = HashMap::from([
+        ("Air".into(), 1),
+        ("Earth".into(), 1),
+        ("Fire".into(), 1),
+        ("Water".into(), 1),
+    ]);
+
+    let elem_keys: Vec<_> = data.elements.keys().cloned().collect();
+    for elem_id in elem_keys {
+        let tier = compute_tier(&elem_id, &data, &mut computed_tiers);
+        data.elements.get_mut(&elem_id).unwrap().tier = tier;
+    }
+
     Ok(data)
+}
+
+fn compute_tier(id: &str, data: &GameData, computed: &mut HashMap<String, i32>) -> i32 {
+    if let Some(tier) = computed.get(id) {
+        return *tier;
+    }
+
+    let combinations = data
+        .combinations
+        .iter()
+        .filter_map(|(comb_id, result)| if result == id { Some(comb_id) } else { None });
+
+    let tiers = combinations.map(|comb_id| {
+        let (c1, c2) = comb_id.split_once('|').unwrap();
+        debug_assert!(!c2.contains('|'));
+
+        let t1 = compute_tier(c1, data, computed);
+        let t2 = compute_tier(c2, data, computed);
+
+        std::cmp::max(t1, t2) + 1
+    });
+
+    let tier = tiers.min().unwrap_or(1000); // random really high number lmao
+    computed.insert(id.to_string(), tier);
+    tier
 }
 
 fn combination_to_data(
