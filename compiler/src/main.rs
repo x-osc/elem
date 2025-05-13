@@ -1,12 +1,15 @@
-use std::{env::args, fs::read_to_string};
+use std::{
+    env::args,
+    fs::{self},
+};
 
-use parser::parse_str;
 use data::stmts_to_data;
-use save::{data_to_files, JsonFiles};
+use parser::parse_str;
+use save::{JsonFiles, data_to_files};
 
 mod color;
-mod parser;
 mod data;
+mod parser;
 mod save;
 
 fn main() {
@@ -14,7 +17,7 @@ fn main() {
         println!("ERROR: no argument supplied");
         return;
     };
-    let Ok(src) = read_to_string(&file_path) else {
+    let Ok(src) = fs::read_to_string(&file_path) else {
         println!("ERROR: could not read file at path {file_path}");
         return;
     };
@@ -35,7 +38,11 @@ fn main() {
         }
     };
 
-    let JsonFiles { elements, categories, combinations } = match data_to_files(data) {
+    let JsonFiles {
+        elements,
+        categories,
+        combinations,
+    } = match data_to_files(data) {
         Ok(files) => files,
         Err(err) => {
             println!("{err}");
@@ -43,5 +50,7 @@ fn main() {
         }
     };
 
-    println!("{elements}\n{categories}\n{combinations}")
+    fs::write("elements.json", elements).unwrap();
+    fs::write("categories.json", categories).unwrap();
+    fs::write("combinations.json", combinations).unwrap();
 }
