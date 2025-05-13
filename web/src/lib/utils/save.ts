@@ -23,10 +23,10 @@ export function loadGameFast(): ElementState {
   }
 
   return {
-    air: ["air"],
-    earth: ["earth"],
-    fire: ["fire"],
-    water: ["water"],
+    Air: ["Air"],
+    Earth: ["Earth"],
+    Fire: ["Fire"],
+    Water: ["Water"],
   };
 }
 
