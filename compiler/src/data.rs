@@ -207,7 +207,7 @@ fn combination_to_data(
         return Err(format!("Element {a} is not declared"));
     }
     if !data.elements.contains_key(b_id) {
-        return Err(format!("Element {a} is not declared"));
+        return Err(format!("Element {b} is not declared"));
     }
     if !data.elements.contains_key(res_id) {
         return Err(format!("Element {result} is not declared"));
