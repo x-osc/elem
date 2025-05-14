@@ -37,6 +37,7 @@ pub struct ElementData {
     pub category: String,
     pub color: HexColor,
     pub tier: i32,
+    pub used_in: i32,
 }
 
 pub fn get_lowest_combinations(data: &GameData) -> Vec<((String, String), i32)> {
@@ -134,6 +135,18 @@ pub fn stmts_to_data(stmts: Vec<Stmt>) -> Result<GameData, String> {
         data.categories.get_mut(&category_id).unwrap().amount = amount;
     }
 
+    let elem_keys: Vec<_> = data.elements.keys().cloned().collect();
+    for elem_id in elem_keys {
+        let used = data
+            .combinations
+            .iter()
+            .filter(|(comb_id, _res)| {
+                elems_from_comb_id(comb_id).0 == elem_id || elems_from_comb_id(comb_id).1 == elem_id
+            })
+            .count() as i32;
+        data.elements.get_mut(&elem_id).unwrap().used_in = used;
+    }
+
     let mut computed_tiers: HashMap<String, i32> = HashMap::from([
         ("Air".into(), 1),
         ("Earth".into(), 1),
@@ -161,11 +174,10 @@ fn compute_tier(id: &str, data: &GameData, computed: &mut HashMap<String, i32>) 
         .filter_map(|(comb_id, result)| if result == id { Some(comb_id) } else { None });
 
     let tiers = combinations.map(|comb_id| {
-        let (c1, c2) = comb_id.split_once('|').unwrap();
-        debug_assert!(!c2.contains('|'));
+        let (c1, c2) = elems_from_comb_id(comb_id);
 
-        let t1 = compute_tier(c1, data, computed);
-        let t2 = compute_tier(c2, data, computed);
+        let t1 = compute_tier(&c1, data, computed);
+        let t2 = compute_tier(&c2, data, computed);
 
         std::cmp::max(t1, t2) + 1
     });
@@ -173,6 +185,13 @@ fn compute_tier(id: &str, data: &GameData, computed: &mut HashMap<String, i32>) 
     let tier = tiers.min().unwrap_or(1000); // random really high number lmao
     computed.insert(id.to_string(), tier);
     tier
+}
+
+fn elems_from_comb_id(comb_id: &str) -> (String, String) {
+    let (e1, e2) = comb_id.split_once('|').unwrap();
+    debug_assert!(!e2.contains('|'));
+
+    (e1.to_owned(), e2.to_owned())
 }
 
 fn combination_to_data(
@@ -246,7 +265,8 @@ fn element_to_data(element: &Element, data: &GameData) -> Result<(String, Elemen
             name: name.to_owned(),
             category: category_id.to_owned(),
             color,
-            tier: 1,
+            tier: 1000,
+            used_in: 0,
         },
     ))
 }

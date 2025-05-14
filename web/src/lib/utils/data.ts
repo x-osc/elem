@@ -10,6 +10,7 @@ export type ElementData = {
   category: string;
   tier: number;
   color: string;
+  used_in: number;
 };
 
 let categories: { [id: string]: CategoryData };
