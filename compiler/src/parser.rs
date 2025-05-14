@@ -289,9 +289,11 @@ mod tests {
             }),
             Stmt::Category(Category {
                 name: "Earth".into(),
+                color: None,
             }),
             Stmt::Category(Category {
                 name: "Fire Man".into(),
+                color: None,
             }),
             Stmt::Combination(Combination {
                 a: "Air".into(),
