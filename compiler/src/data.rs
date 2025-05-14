@@ -215,7 +215,9 @@ fn combination_to_data(
 
     let id = format!("{a_id}|{b_id}");
 
-    if data.combinations.contains_key(&id) {
+    if data.combinations.contains_key(&id)
+        || data.combinations.contains_key(&format!("{b_id}|{a_id}"))
+    {
         return Err(format!("Combination {id} already declared"));
     }
 
