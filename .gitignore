@@ -1,11 +1,4 @@
-/categories.json
-/combinations.json
-/elements.json
+*categories.json
+*combinations.json
+*elements.json
 
-/config/categories.json
-/config/combinations.json
-/config/elements.json
-
-/compiler/categories.json
-/compiler/combinations.json
-/compiler/elements.json
