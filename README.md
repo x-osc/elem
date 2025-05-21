@@ -15,8 +15,8 @@ edit `compiler/elem.elem` file to add elements or whatever
 cd compiler/
 cargo run -- elem.elem
 ```
-if you are on a unix-based os, you can run the copy_data.sh script in the project root
-otherwise, copy the generated categories, combinations, elements .json to `web/static/data/`
+if you are on a unix-based os, you can run the copy_data.sh script in the project root<br>
+otherwise, copy the generated categories, combinations, elements .json to `web/static/data/`<br>
 
 ```sh
 cd web/
