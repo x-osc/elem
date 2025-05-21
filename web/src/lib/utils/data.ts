@@ -54,3 +54,12 @@ export function elementExists(id: string) {
 export function getCategoryData(id: string): CategoryData | null {
   return categories[id] ?? null;
 }
+
+export function getTotalAmount(): number {
+  let total = 0;
+  for (const id in categories) {
+    total += categories[id].amount;
+  }
+
+  return total;
+}

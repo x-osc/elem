@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getElementData, getResult } from "$lib/utils/data";
+  import { getElementData, getResult, getTotalAmount } from "$lib/utils/data";
   import { loadGameSlow, saveGame, type ElementState } from "$lib/utils/save";
   import { setContext } from "svelte";
   import Category from "./Category.svelte";
@@ -58,15 +58,34 @@
 
   setContext("onClickCallback", onElementClicked);
 
+  // total elements
+
   const categories = $derived(Object.keys(elementState));
+
+  const totalAmount = getTotalAmount();
+
+  const elemAmount = $derived(
+    categories.reduce(
+      (total, categoryId) => total + elementState[categoryId].length,
+      0,
+    ),
+  );
 </script>
 
 <svelte:document onclick={onMouseClick} />
 
 <div>
+  <h2 class="amount">{elemAmount} / {totalAmount}</h2>
+
   {#each categories as categoryId}
     <Category id={categoryId} elements={elementState[categoryId]} />
   {/each}
 
   <HeldElement id={heldElement} />
 </div>
+
+<style>
+  .amount {
+    padding-left: 0.5em;
+  }
+</style>
