@@ -1,0 +1,28 @@
+name: Element Suggestion
+description: Suggest an element or combination.
+title: "[Elem]"
+body:
+  - type: input
+    attributes:
+      label: Element
+      description: |
+        Which element would you like to add?
+
+        Elements must not be abstract concepts
+      placeholder: name
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Combination
+      description: How should this element be formed?
+      placeholder: combination
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Notes
+      description: Any other notes?
+    validations:
+      required: false
+
