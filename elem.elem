@@ -119,9 +119,11 @@ Lake = Water + Land
 Ocean = Lake + Lake (Water)
 Ocean World = Ocean + Ocean (Water)
 
-River = Lake + Hill (Water)
-Big River = Lake + Bigger Hill (Water)
-Big River = Lake + Mountain
+Creek = Lake + Hill (Water)
+Brook = Creek + Creek (Water)
+Stream = Lake + Bigger Hill (Water)
+Stream = Brook + Creek
+River = Lake + Mountain
 Flash Flood = River + Rainstorm (Water)
 River Delta = River + Ocean (Water)
 Dam = River + Brick Wall (Water)
