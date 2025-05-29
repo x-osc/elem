@@ -208,6 +208,7 @@ Superdupercontinent = Supercontinent + Supercontinent (Earth)
 Pangea = Supercontinent + Planet Earth (Earth)
 
 Dirt = Ground + Earth (Earth)
+Dirt = Land + Earth
 Dirt Pile = Dirt + Dirt (Earth)
 Big Dirt Pile = Dirt Pile + Dirt (Earth)
 Bigger Dirt Pile = Big Dirt Pile + Dirt (Earth)
@@ -279,6 +280,7 @@ Molten Glass = Lava + Glass (Rock)
 
 # soil types
 Soil = Ground + Water (Earth)
+Soil = Earth + Water
 Dry Soil = Soil + Sun (Earth)
 Damp Dirt = Water Drop + Dirt (Earth)
 Damp Soil = Water Drop + Soil (Earth)
@@ -293,6 +295,7 @@ Loam = Silt + Soil (Earth)
 Sediment = Lake + Sand (Earth)
 
 Island = Earth + Ocean (Earth)
+Island = Ground + Ocean (Earth)
 Archipelago = Island + Island (Earth)
 Swamp = Mud + Lake (Earth)
 
