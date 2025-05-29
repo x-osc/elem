@@ -26,34 +26,136 @@ Tornado = Gale + Gale (Air)
 
 Mist = Air + Steam
 Fog = Mist + Smoke (Air)
+Fog = Cloud + Ground
+Water Vapor = Water + Sun (Air)
 Smog = Smoke + Fog (Air)
 Cloud = Mist + Air (Air)
+Big Cloud = Cloud + Cloud (Air)
+Moving Cloudfront = Cloud + Wind (Air)
+Sky = Cloud + Air (Air)
+Overcast Sky = Cloud + Sky (Air)
+Atmosphere = Sky + Air (Air)
+Jet Stream = Atmosphere + Wind (Air)
 Rain Cloud = Cloud + Water (Air)
 Rain = Rain Cloud + Water (Water)
+Sunbeam = Sun + Cloud (Air)
+
+Smoke Cloud = Smoke + Cloud (Air)
+Steam Cloud = Steam + Steam (Air)
+Ash Cloud = Ash + Cloud (Air)
+Dusty Cloud = Dust + Cloud (Air)
+
+Rainbow = Sunbeam + Rain (Air)
+Prism = Glass + Rainbow (Rock)
+"Double Rainbow !!" = Rainbow + Rainbow (Air)
+
+Acid Rain = Pollution + Rain (Water)
+Dust Rain = Rain + Dust (Earth)
+Lava Rain = Lava + Rain (Fire)
+Obsidian Rain = Lava Rain + Water (Rock)
+Steam Rain = Rain + Fire (Air)
+Scalding Rain = Steam + Rain (Water)
+Driving Rain = Wind + Rain (Water)
+Heavy Rain = Rain + Rain (Water)
+Heavier Rain = Heavy Rain + Heavy Rain (Water)
+Heavier Rain + Heavier Rain = Literally Raining Cats and Dogs (Water)
+
+Horizon = Sky + Planet (Air)
+Horizon = Sky + Ocean
 
 Pollution = Air + Smog (Air)
 Dust Pollution = Dust + Pollution (Air)
 Global Pollution = Planet + Pollution (Air)
-Acid Rain = Pollution + Rain (Water)
+Global Warming = Sun + Global Pollution (Air)
+Global Warming = Sun + Polluted Atmosphere
+Toxic Cloud = Cloud + Pollution (Air)
+Toxic Fog = Fog + Pollution (Air)
+Polluted Atmosphere = Atmosphere + Pollution (Air)
 Acid Pollution = Acid Rain + Pollution (Air)
+Water Pollution = Pollution + Water (Water)
+Diluted Pollution = Water Pollution + Water (Water)
+Polluted Lake = Lake + Pollution (Water)
+Polluted River = River + Pollution (Water)
+Polluted Ocean = Ocean + Pollution (Water)
+Polluted Water Drop = Water Drop + Pollution (Water)
+Contaminated Soil = Soil + Pollution (Earth)
+Sludge = Mud + Pollution (Earth)
 
 Storm = Rain + Gale (Air)
-Rain Storm = Rain + Storm (Water)
-Wind Storm = Wind + Storm (Air)
-Wind Storm = Gale + Storm
-Hurricane = Tornado + Rain Storm (Water)
+Rainstorm = Rain + Storm (Water)
+Windstorm = Wind + Storm (Air)
+Heavy Windstorm = Gale + Storm (Air)
+Sandstorm = Desert + Storm (Air)
+Fire Storm = Fire + Storm (Fire)
+Inferno = Fire Storm + Fire (Fire)
+Solar Storm = Solar Flare + Storm (Fire)
+Dust Storm = Dust + Storm (Air)
+Hurricane = Tornado + Rainstorm (Water)
+Dust Tornado = Dust + Tornado (Air)
+Rainy Tornado = Rain + Tornado (Air)
+Firenado = Fire + Tornado (Fire)
+Fire + Rain Cloud = Lightning (Fire)
+Thundercloud = Cloud + Lightning (Air)
 
-Water Drop = Water + Water (Water)
-Puddle (Water)
+Water Drop + Breeze = drop of water floating on the wind (Water)
+Water Drop + Wind = drop of water floating on the wind
+Steam Drop = Water Drop + Fire (Water)
+
+Puddle = Water + Water (Water)
+Water Drop (Water)
 Large Puddle = Puddle + Puddle (Water)
 
-Lake = Water + Land (Water)
+Smoked Water = Smoke + Water (Water)
+Dried Out Puddle = Puddle + Sun (Water)
+Dried Out Lake = Lake + Sun (Water)
+Doused Fire = Fire + Lake (Fire)
+Doused Fire = Fire + Ocean
+Hot Smoke = Smoke + Fire (Air)
+Hot Smog = Smog + Fire (Air)
+Scorched Earth = Earth + Biggest Fire (Earth)
+
+Lake = Large Puddle + Large Puddle (Water)
+Lake = Water + Land
 Ocean = Lake + Lake (Water)
 Ocean World = Ocean + Ocean (Water)
+
+River = Lake + Hill (Water)
+Big River = Lake + Bigger Hill (Water)
+Big River = Lake + Mountain
+Flash Flood = River + Rainstorm (Water)
+River Delta = River + Ocean (Water)
+Dam = River + Brick Wall (Water)
+
+Mudslide = Mud + Hill (Earth)
+Cracked Land = Sun + Land (Earth)
+Mudflat = Mud + Ground (Earth)
+Cracked Mudflat = Mudflat + Sun (Earth)
+Sunbaked Brick = Sun + Clay (Earth)
+Sunbaked Mud = Sun + Mud (Earth)
+Baked Mud Crust = Mud + Big Fire (Earth)
+
+Slightly Diluted Mud = Mud + Water (Earth)
+Slightly More Diluted Mud = Slightly Diluted Mud + Water (Earth)
+Slightly Less Diluted Mud = Slightly Diluted Mud + Mud (Earth)
+A Larger Amount of Equally Diluted Mud = Slightly Diluted Mud + Slightly Diluted Mud (Earth)
+Murky Lake = Lake + Earth (Water)
+Murky Puddle = Dust + Puddle (Water)
+Murky Water = Dust + Water (Water)
+Dusty Water Drop = Dust + Water Drop (Water)
+Dusty Mud = Dust + Mud (Earth)
+Sandy Mud = Sand + Mud (Earth)
+
+Clay = Earth + Mud (Earth)
+Mud Brick = Mud + Fire (Earth)
+Brick = Fire + Clay (Earth)
+Brick Wall = Brick + Brick (Earth)
+Brick House = Brick Wall + Brick Wall (Earth)
 
 Ripples = Lake + Wind (Water)
 Ripples = Lake + Breeze
 Wave = Ocean + Wind (Water)
+Sea Breeze = Ocean + Breeze (Water)
+Sea Fog = Ocean + Fog (Water)
 Big Wave = Ocean + Gale (Water)
 
 Big Fire = Fire + Fire (Fire)
@@ -61,79 +163,152 @@ Bigger Fire = Big Fire + Big Fire (Fire)
 Biggest Fire = Bigger Fire + Bigger Fire (Fire)
 Biggerest Fire = Bigger Fire + Biggest Fire (Fire)
 
+Stoked Fire = Breeze + Fire (Fire)
+Big Stoked Fire = Breeze + Big Fire (Fire)
+Big Stoked Fire = Wind + Big Fire
+
 Lava Puddle = Lava + Lava (Fire)
 Lava Lake = Lava Puddle + Lava Puddle (Fire)
 Lava Ocean = Lava Lake + Lava Lake (Fire)
+Lava River = Lava + River (Fire)
+Lahar = Lava + Mud (Fire)
+Pyroclastic Flow (Fire)
+Magma = Molten Rock + Lava (Fire)
+Molten Core = Planet + Magma (Fire)
 
+The Floor Is Lava = Lava + Ground (Fire)
 Hell = Lava Ocean + Biggest Fire (Fire)
+"Dante's Inferno" = Hell + Inferno (Fire)
 
 Volcano = Mountain + Lava (Fire)
+Undersea Volcano = Volcano + Ocean (Fire)
+Volcanic Fallout = Volcano + Air (Air)
 Supervolcano = Volcano + Volcano (Fire)
+Omegavolcano = Supervolcano + Supervolcano (Fire)
 
-Ash = Dust + Fire (Earth)
+Ash Cloud = Volcano + Smoke
+Really Big Ash Cloud = Supervolcano + Smoke (Air)
+
+Geyser = Earth + Steam (Water)
+Hot Spring = Geyser + Lake (Water)
+Lava Geyser = Geyser + Lava (Fire)
+
+Ash (Earth)
+Ash Pile = Ash + Ash (Earth)
+Airborne Dust = Dust + Wind (Earth)
+Dust Attack = Gale + Dust (Earth)
 Dust Bunny = Dust + Dust (Earth)
+Layer of Dust = Dust + Ground (Earth)
 
 Ground = Earth + Earth (Earth)
 Land = Ground + Ground (Earth)
 Continent = Land + Land (Earth)
 Supercontinent = Continent + Continent (Earth)
 Superdupercontinent = Supercontinent + Supercontinent (Earth)
+Pangea = Supercontinent + Planet Earth (Earth)
 
 Dirt = Ground + Earth (Earth)
 Dirt Pile = Dirt + Dirt (Earth)
-Big Dirt Pile = Dirt Pile + Earth (Earth)
-Bigger Dirt Pile = Big Dirt Pile + Earth (Earth)
-Even Bigger Dirt Pile = Bigger Dirt Pile + Earth (Earth)
+Big Dirt Pile = Dirt Pile + Dirt (Earth)
+Bigger Dirt Pile = Big Dirt Pile + Dirt (Earth)
+Even Bigger Dirt Pile = Bigger Dirt Pile + Dirt (Earth)
 
 Mound = Dirt Pile + Dirt Pile (Earth)
 Hill = Mound + Mound (Earth)
-Hill + Hill = Tall Hill (Earth)
+Hill + Hill = Bigger Hill (Earth)
+Mountain = Bigger Hill + Bigger Hill (Rock)
+Mountain Range = Mountain + Mountain (Rock)
 
-Island = Land + Ocean (Earth)
-Swamp = Mud + Lake (Earth)
+Updraft = Wind + Mountain (Air)
+Eroded Hill = Hill + Rain (Earth)
+Eroded Mountain = Mountain + Rain (Rock)
+Plateau = Hill + Ground (Earth)
+Mountain Peak = Mountain + Air (Rock)
+Foggy Peak = Mountain Peak + Fog (Rock)
 
-Clay = Sand + Mud (Earth)
-Brick = Fire + Clay (Earth)
-Brick Wall = Brick + Brick (Earth)
-Brick House = Brick Wall + Brick Wall (Earth)
-
+Sun = Sky + Fire (Fire)
 Planet = Supercontinent + Ocean (Space)
+Planet = Continent + Ocean
 Planet Earth = Planet + Earth (Space)
 Jupiter = Storm + Planet (Space)
 Mars = Desert + Planet (Space)
-Venus = Pollution + Planet (Space)
-Venus = Acid Rain + Planet
+Venus = Acid Rain + Planet (Space)
+
+Solar Flare = Sun + Fire Storm (Space)
+Solar Wind = Sun + Wind (Space)
+Star = Sky + Sun (Space)
+Binary Star System = Star + Star (Space)
+Solar System = Star + Planet (Space)
+Solar System = Sun + Planet
+Galaxy = Solar System + Solar System (Space)
+Local Group = Galaxy + Galaxy (Space)
+Supercluster = Local Group + Local Group (Space)
+Universe = Supercluster + Supercluster (Space)
+Multiverse = Universe + Universe (Space)
+
+Constellation = Star + Sky (Space)
+Twinkling Star = Atmosphere + Star (Space)
+Aurora Borealis = Solar Wind + Atmosphere (Air)
 
 Glass = Sand + Fire (Rock)
+Aquarium = Glass + Water (Water)
 Obsidian = Lava + Water (Rock)
-Igneous Rock = Lava + Air (Rock)
-Igneous Rock = Lava + Mist
-Igneous Rock = Lava + Steam
+Obsidian Drop = Lava + Water Drop (Rock)
+Basalt = Lava + Mist (Rock)
+Basalt = Lava + Wind
 Pumice = Lava + Ocean (Rock)
-Pumice = Igneous Rock + Air
-Pebble = Igneous Rock + Ocean (Rock)
+Pumice = Basalt + Air
+Pebble = Basalt + River (Rock)
 Pile of Pebbles = Pebble + Pebble (Rock)
 Large Pile of Pebbles = Pile of Pebbles + Pile of Pebbles (Rock)
 
 # burnt things
-Burnt Igneous Rock = Igneous Rock + Fire (Rock)
+Burnt Basalt = Basalt + Fire (Rock)
+Burnt Pumice = Pumice + Fire (Rock)
+Burnt Pebble = Pebble + Fire (Rock)
+
+Burnt Dust = Dust + Fire (Earth)
 
 # melted things
-Melted Rock = Lava + Igneous Rock (Rock)
+Molten Rock = Lava + Basalt (Rock)
+Molten Rock = Lava + Pumice
+Molten Rock = Lava + Pebble
+Molten Glass = Lava + Glass (Rock)
 
 # soil types
-Sandy Soil = Sand + Earth (Earth)
+Soil = Ground + Water (Earth)
+Dry Soil = Soil + Sun (Earth)
+Damp Dirt = Water Drop + Dirt (Earth)
+Damp Soil = Water Drop + Soil (Earth)
+Damp Soil = Water Drop + Earth
+Sandy Soil = Sand + Soil (Earth)
+Pumice Soil = Pumice + Soil (Earth)
+Pebbly Soil = Soil + Pebble (Earth)
 Silt = Sand + Clay (Earth)
-Loam = Silt + Earth (Earth)
-Pumice Soil = Pumice + Earth (Earth)
+Loess = Wind + Silt (Earth)
+Loam = Silt + Soil (Earth)
 
-Sand = Pebble + Ocean (Earth)
-Pile of Sand = Sand + Sand (Earth)
-Beach = Sand + Ocean (Water)
-Sand Dune = Wind + Beach (Earth)
+Sediment = Lake + Sand (Earth)
+
+Island = Earth + Ocean (Earth)
+Archipelago = Island + Island (Earth)
+Swamp = Mud + Lake (Earth)
+
+Shore = Land + Ocean (Rock)
+Seaside Cliff = Mountain + Ocean (Rock)
+Sand = Pebble + Ocean (Rock)
+Sand = Basalt + Ocean
+Sand = Pumice + Ocean
+Pile of Sand = Sand + Sand (Rock)
+Beach = Sand + Ocean (Rock)
+Island Beach = Island + Beach (Rock)
+Desert Island = Island + Desert (Rock)
+Tide Pool = Shore + Puddle (Water)
+Sand Dune = Wind + Beach (Rock)
 Sand Dune = Breeze + Beach
-Desert (Earth)
+Desert = Sand + Land (Rock)
+Desert = Sand Dune + Land
+Sand on an Island = Sand + Island (Rock)
+Pile of Sand on an Island = Pile of Sand + Island (Rock)
 Oasis = Lake + Desert (Water)
 
-Mountain (Rock)
-Mountain Range = Mountain + Mountain (Rock)
