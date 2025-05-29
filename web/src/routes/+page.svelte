@@ -1,5 +1,6 @@
 <script lang="ts">
   import MainGame from "$lib/components/MainGame.svelte";
+  import Links from "$lib/components/Links.svelte"
   import { loadData } from "$lib/utils/data";
 </script>
 
@@ -14,6 +15,7 @@
 {:then _}
   <MainGame />
 {/await}
+<Links />
 
 <style>
   .loading {
