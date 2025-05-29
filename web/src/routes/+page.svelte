@@ -8,7 +8,15 @@
 </svelte:head>
 
 {#await loadData()}
-  <p>loading...</p>
+  <div class="loading">
+    <p>loading...</p>
+  </div>
 {:then _}
   <MainGame />
 {/await}
+
+<style>
+  .loading {
+    margin: 1em;
+  }
+</style>
