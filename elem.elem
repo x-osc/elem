@@ -123,7 +123,7 @@ Creek = Lake + Hill (Water)
 Brook = Creek + Creek (Water)
 Stream = Lake + Bigger Hill (Water)
 Stream = Brook + Creek
-River = Lake + Mountain
+River = Lake + Mountain (Water)
 Flash Flood = River + Rainstorm (Water)
 River Delta = River + Ocean (Water)
 Dam = River + Brick Wall (Water)
@@ -282,7 +282,6 @@ Molten Glass = Lava + Glass (Rock)
 
 # soil types
 Soil = Ground + Water (Earth)
-Soil = Earth + Water
 Dry Soil = Soil + Sun (Earth)
 Damp Dirt = Water Drop + Dirt (Earth)
 Damp Soil = Water Drop + Soil (Earth)
@@ -297,7 +296,7 @@ Loam = Silt + Soil (Earth)
 Sediment = Lake + Sand (Earth)
 
 Island = Earth + Ocean (Earth)
-Island = Ground + Ocean (Earth)
+Island = Ground + Ocean
 Archipelago = Island + Island (Earth)
 Swamp = Mud + Lake (Earth)
 
