@@ -1,4 +1,7 @@
-use std::{collections::HashMap, str::FromStr};
+use std::{
+    collections::{HashMap, HashSet},
+    str::FromStr,
+};
 
 use serde::{Deserialize, Serialize};
 
@@ -66,8 +69,12 @@ pub fn get_lowest_combinations(data: &GameData) -> Vec<((String, String), i32)> 
     ]);
 
     for (elem1, elem2) in all_combinations {
-        let t1 = compute_tier(elem1, data, &mut computed_tiers);
-        let t2 = compute_tier(elem2, data, &mut computed_tiers);
+        let mut visited1 = HashSet::new();
+        let mut visited2 = HashSet::new();
+
+        let t1 = compute_tier(elem1, data, &mut computed_tiers, &mut visited1);
+        let t2 = compute_tier(elem2, data, &mut computed_tiers, &mut visited2);
+
         let tier = std::cmp::max(t1, t2) + 1;
         combinations_with_tier.push(((elem1.clone(), elem2.clone()), tier));
     }
@@ -156,17 +163,32 @@ pub fn stmts_to_data(stmts: Vec<Stmt>) -> Result<GameData, String> {
 
     let elem_keys: Vec<_> = data.elements.keys().cloned().collect();
     for elem_id in elem_keys {
-        let tier = compute_tier(&elem_id, &data, &mut computed_tiers);
+        let mut visited = HashSet::new();
+        let tier = compute_tier(&elem_id, &data, &mut computed_tiers, &mut visited);
         data.elements.get_mut(&elem_id).unwrap().tier = tier;
     }
 
     Ok(data)
 }
 
-fn compute_tier(id: &str, data: &GameData, computed: &mut HashMap<String, i32>) -> i32 {
+fn compute_tier(
+    id: &str,
+    data: &GameData,
+    computed: &mut HashMap<String, i32>,
+    visited: &mut HashSet<String>,
+) -> i32 {
+    // return cached value if already computed
     if let Some(tier) = computed.get(id) {
         return *tier;
     }
+
+    // detect cycles
+    if visited.contains(id) {
+        println!("Cycle detected for element {id}");
+        return 1000;
+    }
+
+    visited.insert(id.to_string());
 
     let combinations = data
         .combinations
@@ -176,15 +198,18 @@ fn compute_tier(id: &str, data: &GameData, computed: &mut HashMap<String, i32>) 
     let tiers = combinations.map(|comb_id| {
         let (c1, c2) = elems_from_comb_id(comb_id);
 
-        let t1 = compute_tier(&c1, data, computed);
-        let t2 = compute_tier(&c2, data, computed);
+        let t1 = compute_tier(&c1, data, computed, visited);
+        let t2 = compute_tier(&c2, data, computed, visited);
 
         std::cmp::max(t1, t2) + 1
     });
 
-    let tier = tiers.min().unwrap_or(1000); // random really high number lmao
-    computed.insert(id.to_string(), tier);
-    tier
+    let final_tier = tiers.min().unwrap_or(1000); // random really high number lmao
+
+    visited.remove(id);
+    computed.insert(id.to_string(), final_tier);
+
+    final_tier
 }
 
 fn elems_from_comb_id(comb_id: &str) -> (String, String) {
