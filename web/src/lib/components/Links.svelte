@@ -1,12 +1,18 @@
 <div class="padding"></div>
 <div class="links">
-  <a class="source" target="_blank" href="https://github.com/x-osc/elem">SOURCE</a>
-  <a class="suggest" target="_blank" href="https://github.com/x-osc/elem/issues/new/choose">SUGGESTIONS</a>
+  <a class="source" target="_blank" href="https://github.com/x-osc/elem"
+    >SOURCE</a
+  >
+  <a
+    class="suggest"
+    target="_blank"
+    href="https://github.com/x-osc/elem/issues/new/choose">SUGGESTIONS</a
+  >
 </div>
 
 <style>
   .padding {
-    height: 3em
+    height: 3em;
   }
 
   .links {

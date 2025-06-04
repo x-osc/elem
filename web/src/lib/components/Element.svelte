@@ -10,6 +10,7 @@
     category: "NULL",
     tier: 1,
     color: "#f700ff",
+    used_in: 0,
   };
 
   let onClickCallback: (event: MouseEvent, id: string) => void =
