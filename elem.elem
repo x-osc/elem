@@ -30,15 +30,21 @@ Fog = Cloud + Ground
 Water Vapor = Water + Sun (Air)
 Smog = Smoke + Fog (Air)
 Cloud = Mist + Air (Air)
+Cloud = Mist + Mist
+Cloud = Mist + Sky
+Cloud = Water Vapor + Air
 Big Cloud = Cloud + Cloud (Air)
 Moving Cloudfront = Cloud + Wind (Air)
 Sky = Cloud + Air (Air)
 Overcast Sky = Cloud + Sky (Air)
 Atmosphere = Sky + Air (Air)
 Jet Stream = Atmosphere + Wind (Air)
+Waterspout = Ocean + Tornado (Air)
 Rain Cloud = Cloud + Water (Air)
 Rain = Rain Cloud + Water (Water)
+Rain = Overcast Sky + Water
 Sunbeam = Sun + Cloud (Air)
+Sunbeam = Sun + Atmosphere
 
 Smoke Cloud = Smoke + Cloud (Air)
 Steam Cloud = Steam + Steam (Air)
@@ -64,6 +70,9 @@ Horizon = Sky + Planet (Air)
 Horizon = Sky + Ocean
 
 Pollution = Air + Smog (Air)
+Pollution = Smoke + Smog
+Pollution = Atmosphere + Smog
+Pollution = Atmosphere + Smoke
 Dust Pollution = Dust + Pollution (Air)
 Global Pollution = Planet + Pollution (Air)
 Global Warming = Sun + Global Pollution (Air)
@@ -88,6 +97,7 @@ Heavy Windstorm = Gale + Storm (Air)
 Sandstorm = Desert + Storm (Air)
 Fire Storm = Fire + Storm (Fire)
 Inferno = Fire Storm + Fire (Fire)
+Inferno = Biggest Fire + Storm
 Solar Storm = Solar Flare + Storm (Fire)
 Dust Storm = Dust + Storm (Air)
 Hurricane = Tornado + Rainstorm (Water)
@@ -113,6 +123,7 @@ Doused Fire = Fire + Ocean
 Hot Smoke = Smoke + Fire (Air)
 Hot Smog = Smog + Fire (Air)
 Scorched Earth = Earth + Biggest Fire (Earth)
+Scorched Earth = Planet Earth + Biggest Fire
 
 Lake = Large Puddle + Large Puddle (Water)
 Lake = Water + Land
@@ -141,8 +152,8 @@ Slightly More Diluted Mud = Slightly Diluted Mud + Water (Earth)
 Slightly Less Diluted Mud = Slightly Diluted Mud + Mud (Earth)
 A Larger Amount of Equally Diluted Mud = Slightly Diluted Mud + Slightly Diluted Mud (Earth)
 Murky Lake = Lake + Earth (Water)
-Murky Puddle = Dust + Puddle (Water)
-Murky Water = Dust + Water (Water)
+Murky Puddle = Earth + Puddle (Water)
+Dusty Water = Dust + Water (Water)
 Dusty Water Drop = Dust + Water Drop (Water)
 Dusty Mud = Dust + Mud (Earth)
 Sandy Mud = Sand + Mud (Earth)
@@ -174,12 +185,15 @@ Lava Lake = Lava Puddle + Lava Puddle (Fire)
 Lava Ocean = Lava Lake + Lava Lake (Fire)
 Lava River = Lava + River (Fire)
 Lahar = Lava + Mud (Fire)
-Pyroclastic Flow (Fire)
+Pyroclastic Flow = Lahar + Smoke (Fire)
+Pyroclastic Flow = Lava + Smoke
+Pyroclastic Flow = Lahar + Ash
 Magma = Molten Rock + Lava (Fire)
 Molten Core = Planet + Magma (Fire)
 
 The Floor Is Lava = Lava + Ground (Fire)
 Hell = Lava Ocean + Biggest Fire (Fire)
+"Extra-Hell" = Hell + Hell (Fire)
 "Dante's Inferno" = Hell + Inferno (Fire)
 
 Volcano = Mountain + Lava (Fire)
@@ -230,14 +244,17 @@ Mountain Peak = Mountain + Air (Rock)
 Foggy Peak = Mountain Peak + Fog (Rock)
 
 Sun = Sky + Fire (Fire)
+Sun = Atmosphere + Fire
 Planet = Supercontinent + Ocean (Space)
 Planet = Continent + Ocean
 Planet Earth = Planet + Earth (Space)
 Jupiter = Storm + Planet (Space)
 Mars = Desert + Planet (Space)
 Venus = Acid Rain + Planet (Space)
+"Earth's Atmosphere" = Planet Earth + Atmosphere (Air)
 
 Solar Flare = Sun + Fire Storm (Space)
+Solar Flare = Sun + Storm
 Solar Wind = Sun + Wind (Space)
 Star = Sky + Sun (Space)
 Binary Star System = Star + Star (Space)
@@ -294,6 +311,7 @@ Loess = Wind + Silt (Earth)
 Loam = Silt + Soil (Earth)
 
 Sediment = Lake + Sand (Earth)
+Sediment = River + Sand
 
 Island = Earth + Ocean (Earth)
 Island = Ground + Ocean
@@ -302,9 +320,22 @@ Swamp = Mud + Lake (Earth)
 
 Shore = Land + Ocean (Rock)
 Seaside Cliff = Mountain + Ocean (Rock)
+Sand = Pebble + Water
+Sand = Basalt + Water
+Sand = Pumice + Water
 Sand = Pebble + Ocean (Rock)
 Sand = Basalt + Ocean
 Sand = Pumice + Ocean
+Sand Blowing in the Wind = Eroded Mountain + Wind (Rock)
+Sand Blowing in the Wind = Eroded Hill + Wind
+# TODO: make better
+Sandstone = Sediment + Sand (Rock)
+Mudstone = Mud + Sediment (Rock)
+Siltstone = Silt + Sediment (Rock)
+Quartzite = Sandstone + Fire (Rock)
+# Coarse Sandstone = Sand + Mud (Earth)
+Conglomerate = Pebble + Mud (Earth)
+Conglomerate = Pebble + Clay
 Pile of Sand = Sand + Sand (Rock)
 Beach = Sand + Ocean (Rock)
 Island Beach = Island + Beach (Rock)
