@@ -19,13 +19,13 @@ let elements: { [id: string]: ElementData };
 
 export async function loadData() {
   categories = await fetch(`${base}/data/categories.json`).then((res) =>
-    res.json()
+    res.json(),
   );
   combinations = await fetch(`${base}/data/combinations.json`).then((res) =>
-    res.json()
+    res.json(),
   );
   elements = await fetch(`${base}/data/elements.json`).then((res) =>
-    res.json()
+    res.json(),
   );
 }
 
