@@ -31,20 +31,24 @@ Water Vapor = Water + Sun (Air)
 Smog = Smoke + Fog (Air)
 Cloud = Mist + Air (Air)
 Cloud = Mist + Mist
-Cloud = Mist + Sky
 Cloud = Steam + Air
 Cloud = Water Vapor + Air
 Big Cloud = Cloud + Cloud (Air)
 Moving Cloudfront = Cloud + Wind (Air)
 Sky = Cloud + Air (Air)
+Sky = Mist + Atmosphere
+Sky = Cloud + Atmosphere
 Overcast Sky = Cloud + Sky (Air)
 Atmosphere = Sky + Air (Air)
+Atmosphere = Sky + Planet
 Stratosphere = Sky + Atmosphere (Air)
+Stratosphere = Air + Planet
 Jet Stream = Atmosphere + Wind (Air)
 Waterspout = Ocean + Tornado (Air)
 Rain Cloud = Cloud + Water (Air)
 Rain = Rain Cloud + Water (Water)
 Rain = Overcast Sky + Water
+Sun Shower = Sun + Rain (Water)
 Sunbeam = Sun + Cloud (Air)
 Sunbeam = Sun + Atmosphere
 
@@ -56,6 +60,30 @@ Dusty Cloud = Dust + Cloud (Air)
 Rainbow = Sunbeam + Rain (Air)
 Prism = Glass + Rainbow (Rock)
 "Double Rainbow !!" = Rainbow + Rainbow (Air)
+
+Snow = Rain + Mountain (Water)
+Snow = Rain + Mountain Range
+Snow = Mist + Mountain
+Snow = Mist + Mountain Range
+Snow = Steam + Mountain
+Snow = Steam + Mountain Range
+Snow = Water Vapor + Mountain
+Snow = Water Vapor + Mountain Range
+
+Blizzard = Snow + Snow (Water)
+Blizzard = Snow + Storm 
+Blizzard = Snow + Gale
+Avalanche = Snow + Earthquake (Water)
+Glacier = Snow + Mountain (Water)
+Glacier = Snow + Mountain Range 
+Igloo = House + Snow (Water)
+Igloo = House + Antarctica
+
+# TODO: ice
+Antarctica = Snow + Desert (Water)
+Antarctica = Snow + Continent
+
+Aurora Borealis = Antarctica + Sky (Air)
 
 Acid Rain = Pollution + Rain (Water)
 Dust Rain = Rain + Dust (Earth)
@@ -149,8 +177,7 @@ River = Stream + Stream
 Waterfall = River + Hill (Water)
 Flash Flood = River + Rainstorm (Water)
 River Delta = River + Ocean (Water)
-Dam = River + Brick Wall (Water)
-Dam = River + Mud Wall
+Dam = River + Mud Wall (Water)
 
 Mudslide = Mud + Hill (Earth)
 Cracked Land = Sun + Land (Earth)
@@ -174,10 +201,11 @@ Sandy Mud = Sand + Mud (Earth)
 Clay = Earth + Mud (Earth)
 Mud Brick = Mud + Fire (Earth)
 Brick = Fire + Clay (Earth)
-Brick Wall = Brick + Brick (Earth)
+Wall = Brick + Brick (Earth)
 Mud Wall = Mud Brick + Mud Brick (Earth)
-Brick House = Brick Wall + Brick Wall (Earth)
-Mud House = Mud Wall + Mud Wall (Earth)
+House = Brick Wall + Brick Wall (Earth)
+Mud Hut = Mud Wall + Mud Wall (Earth)
+Firewall = Brick Wall + Fire (Fire)
 
 Ripples = Lake + Wind (Water)
 Ripples = Lake + Breeze
@@ -260,6 +288,7 @@ Foggy Peak = Mountain Peak + Fog (Rock)
 
 Sun = Sky + Fire (Fire)
 Sun = Atmosphere + Fire
+Sun = Planet + Fire
 Planet = Supercontinent + Ocean (Space)
 Planet = Continent + Ocean
 Planet Earth = Planet + Earth (Space)
@@ -267,6 +296,15 @@ Jupiter = Storm + Planet (Space)
 Mars = Desert + Planet (Space)
 Venus = Acid Rain + Planet (Space)
 "Earth's Atmosphere" = Planet Earth + Atmosphere (Air)
+
+Asteroid = Rock + Planet (Space)
+Meteor = Asteroid + Atmosphere (Space)
+Meteor Shower = Meteor + Meteor (Space)
+#Comet = Ice + Asteroid (Space)
+
+Nebula = Star + Ash Cloud (Space)
+Really Big Nebula = Star + Really Big Ash Cloud (Space)
+Star = Nebula + Nebula
 
 Solar Flare = Sun + Fire Storm (Space)
 Solar Flare = Sun + Storm
@@ -305,7 +343,7 @@ Burnt Basalt = Basalt + Fire (Rock)
 Burnt Pumice = Pumice + Fire (Rock)
 Burnt Pebble = Pebble + Fire (Rock)
 
-Burnt Dust = Dust + Fire (Earth)
+Ash = Dust + Fire
 
 # melted things
 Molten Rock = Lava + Basalt (Rock)
