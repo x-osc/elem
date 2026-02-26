@@ -6,6 +6,7 @@
 (Earth) [#734f31]
 (Space) [#814ad2]
 (Rock) [#555555]
+(Life) [#139120]
 
 Air (Air)
 Water (Water)
@@ -24,7 +25,6 @@ Gale = Wind + Wind (Air)
 Breeze = Wind + Air (Air)
 Tornado = Gale + Gale (Air)
 
-Mist = Air + Steam
 Fog = Mist + Smoke (Air)
 Fog = Cloud + Ground
 Water Vapor = Water + Sun (Air)
@@ -32,12 +32,14 @@ Smog = Smoke + Fog (Air)
 Cloud = Mist + Air (Air)
 Cloud = Mist + Mist
 Cloud = Mist + Sky
+Cloud = Steam + Air
 Cloud = Water Vapor + Air
 Big Cloud = Cloud + Cloud (Air)
 Moving Cloudfront = Cloud + Wind (Air)
 Sky = Cloud + Air (Air)
 Overcast Sky = Cloud + Sky (Air)
 Atmosphere = Sky + Air (Air)
+Stratosphere = Sky + Atmosphere (Air)
 Jet Stream = Atmosphere + Wind (Air)
 Waterspout = Ocean + Tornado (Air)
 Rain Cloud = Cloud + Water (Air)
@@ -59,8 +61,9 @@ Acid Rain = Pollution + Rain (Water)
 Dust Rain = Rain + Dust (Earth)
 Lava Rain = Lava + Rain (Fire)
 Obsidian Rain = Lava Rain + Water (Rock)
-Steam Rain = Rain + Fire (Air)
-Scalding Rain = Steam + Rain (Water)
+Dry Rain = Rain + Fire (Water)
+# Steam Rain = Rain + Biggest Fire (Air)
+# Scalding Rain = Steam + Rain (Water)
 Driving Rain = Wind + Rain (Water)
 Heavy Rain = Rain + Rain (Water)
 Heavier Rain = Heavy Rain + Heavy Rain (Water)
@@ -68,6 +71,7 @@ Heavier Rain + Heavier Rain = Literally Raining Cats and Dogs (Water)
 
 Horizon = Sky + Planet (Air)
 Horizon = Sky + Ocean
+Sunrise = Horizon + Sun (Air)
 
 Pollution = Air + Smog (Air)
 Pollution = Smoke + Smog
@@ -87,6 +91,7 @@ Polluted Lake = Lake + Pollution (Water)
 Polluted River = River + Pollution (Water)
 Polluted Ocean = Ocean + Pollution (Water)
 Polluted Water Drop = Water Drop + Pollution (Water)
+Polluted Swamp = Swamp + Pollution (Water)
 Contaminated Soil = Soil + Pollution (Earth)
 Sludge = Mud + Pollution (Earth)
 
@@ -95,6 +100,7 @@ Rainstorm = Rain + Storm (Water)
 Windstorm = Wind + Storm (Air)
 Heavy Windstorm = Gale + Storm (Air)
 Sandstorm = Desert + Storm (Air)
+Sandstorm = Sand + Storm
 Fire Storm = Fire + Storm (Fire)
 Inferno = Fire Storm + Fire (Fire)
 Inferno = Biggest Fire + Storm
@@ -118,10 +124,12 @@ Large Puddle = Puddle + Puddle (Water)
 Smoked Water = Smoke + Water (Water)
 Dried Out Puddle = Puddle + Sun (Water)
 Dried Out Lake = Lake + Sun (Water)
-Doused Fire = Fire + Lake (Fire)
-Doused Fire = Fire + Ocean
-Hot Smoke = Smoke + Fire (Air)
-Hot Smog = Smog + Fire (Air)
+# Doused Fire = Fire + Lake (Fire)
+# Doused Fire = Fire + Ocean
+# Hot Smoke = Smoke + Fire (Air)
+# Lukewarm Smoke =
+# Hot Smog = Smog + Fire (Air)
+# Lukewarm Smog = 
 Scorched Earth = Earth + Biggest Fire (Earth)
 Scorched Earth = Planet Earth + Biggest Fire
 
@@ -131,13 +139,18 @@ Ocean = Lake + Lake (Water)
 Ocean World = Ocean + Ocean (Water)
 
 Creek = Lake + Hill (Water)
-Brook = Creek + Creek (Water)
-Stream = Lake + Bigger Hill (Water)
-Stream = Brook + Creek
+Stream = Creek + Creek (Water)
+Stream = Lake + Bigger Hill
+# Brook =
 River = Lake + Mountain (Water)
+River = Water + Mountain
+River = Stream + Stream
+# cliff
+Waterfall = River + Hill (Water)
 Flash Flood = River + Rainstorm (Water)
 River Delta = River + Ocean (Water)
 Dam = River + Brick Wall (Water)
+Dam = River + Mud Wall
 
 Mudslide = Mud + Hill (Earth)
 Cracked Land = Sun + Land (Earth)
@@ -162,7 +175,9 @@ Clay = Earth + Mud (Earth)
 Mud Brick = Mud + Fire (Earth)
 Brick = Fire + Clay (Earth)
 Brick Wall = Brick + Brick (Earth)
+Mud Wall = Mud Brick + Mud Brick (Earth)
 Brick House = Brick Wall + Brick Wall (Earth)
+Mud House = Mud Wall + Mud Wall (Earth)
 
 Ripples = Lake + Wind (Water)
 Ripples = Lake + Breeze
@@ -257,6 +272,7 @@ Solar Flare = Sun + Fire Storm (Space)
 Solar Flare = Sun + Storm
 Solar Wind = Sun + Wind (Space)
 Star = Sky + Sun (Space)
+Star = Universe + Sun
 Binary Star System = Star + Star (Space)
 Solar System = Star + Planet (Space)
 Solar System = Sun + Planet
@@ -318,6 +334,8 @@ Island = Ground + Ocean
 Archipelago = Island + Island (Earth)
 Swamp = Mud + Lake (Earth)
 
+Algae = Swamp + Sun (Life)
+
 Shore = Land + Ocean (Rock)
 Seaside Cliff = Mountain + Ocean (Rock)
 Sand = Pebble + Water
@@ -328,6 +346,10 @@ Sand = Basalt + Ocean
 Sand = Pumice + Ocean
 Sand Blowing in the Wind = Eroded Mountain + Wind (Rock)
 Sand Blowing in the Wind = Eroded Hill + Wind
+Ocean Water = Ocean + Water (Water)
+Salt = Ocean + Sun (Rock)
+Salt = Ocean Water + Fire
+Salt = Ocean Water + Sun
 # TODO: make better
 Sandstone = Sediment + Sand (Rock)
 Mudstone = Mud + Sediment (Rock)
@@ -337,6 +359,7 @@ Quartzite = Sandstone + Fire (Rock)
 Conglomerate = Pebble + Mud (Earth)
 Conglomerate = Pebble + Clay
 Pile of Sand = Sand + Sand (Rock)
+Big Pile of Sand = Pile of Sand + Pile of Sand (Rock)
 Beach = Sand + Ocean (Rock)
 Island Beach = Island + Beach (Rock)
 Desert Island = Island + Desert (Rock)

@@ -297,3 +297,32 @@ fn element_to_data(element: &Element, data: &GameData) -> Result<(String, Elemen
         },
     ))
 }
+
+pub fn export_dot(data: &GameData) -> String {
+    let mut out = String::from(
+        r#"digraph combinations {
+    node [shape=box]
+    layout="fdp"
+    sep="+7"
+"#,
+    );
+
+    for (id, elem) in &data.elements {
+        out.push_str(&format!(
+            r#"  "{}" [label="{} (t{})", style=filled, fillcolor="{}"];"#,
+            id, elem.name, elem.tier, elem.color
+        ));
+        out.push('\n');
+    }
+
+    for (comb_id, result) in &data.combinations {
+        let (elem1, elem2) = elems_from_comb_id(comb_id);
+        out.push_str(&format!(r#"  "{elem1}" -> "{result}";"#));
+        out.push('\n');
+        out.push_str(&format!(r#"  "{elem2}" -> "{result}";"#));
+        out.push('\n');
+    }
+
+    out.push('}');
+    out
+}

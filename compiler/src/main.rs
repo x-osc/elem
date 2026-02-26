@@ -3,7 +3,7 @@ use std::{
     fs::{self},
 };
 
-use data::{get_lowest_combinations, stmts_to_data};
+use data::{export_dot, get_lowest_combinations, stmts_to_data};
 use parser::parse_str;
 use save::{JsonFiles, data_to_files};
 
@@ -41,6 +41,11 @@ fn main() {
     for ((elem1, elem2), tier) in get_lowest_combinations(&data).iter().take(200) {
         println!("{elem1} | {elem2} : {tier}")
     }
+
+    let dot = export_dot(&data);
+    fs::write("graph.dot", &dot).unwrap();
+
+    println!("wrote graphviz dot file to ./graph.dot");
 
     let JsonFiles {
         elements,
